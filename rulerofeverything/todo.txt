@@ -1,0 +1,3 @@
+rulerofeverything:
+kill inversefact.cpp. also try memoized+binary search version of it
+fix nchooselogn
