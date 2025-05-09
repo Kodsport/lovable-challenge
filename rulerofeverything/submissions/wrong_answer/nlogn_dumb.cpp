@@ -1,5 +1,4 @@
 // INCORRECT
-// knows about optimal order argument. O(NlogN) by only caring about states with at most 40
 #include <bits/stdc++.h>
 using namespace std;
 

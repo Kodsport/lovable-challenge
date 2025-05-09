@@ -1,4 +1,4 @@
-// do recursive bruteforce on those with a > 1. bounded by n!/(n-logn)!
+// do recursive bruteforce on those with a > 1. 
 #include <bits/stdc++.h>
 using namespace std;
 

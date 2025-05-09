@@ -48,37 +48,29 @@ signed main()
 
     int ans = inf;
 
-    vvi dp(sz(vids) + 1, vi(40, -1));
+    vi dp(40, -1);
 
     auto tryv = [&](int start)
         {
-            rep(i, sz(vids)+1) rep(j, 39) dp[i][j] = -1;
-            dp[0][0] = start;
+            rep(j, 40) dp[j] = -1;
+            dp[0] = start;
 
-            rep(i, sz(vids))
+            rep(i,sz(vids))
             {
-                rep(j, 39)
+                for (int j = 39; j > 0; j--)
                 {
-                    if (dp[i][j] == -1) continue;
-                    dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
-                    dp[i + 1][j] = min(dp[i + 1][j], t + 1);
-                    dp[i + 1][j + 1] = max(dp[i + 1][j + 1], dp[i][j] * vids[i].first + vids[i].second);
-                    dp[i + 1][j + 1] = min(dp[i + 1][j + 1], t + 1);
+                    if (dp[j-1] == -1) continue;
+                    dp[j] = max(dp[j], dp[j-1] * vids[i].first + vids[i].second);
+                    dp[j] = min(dp[j], t + 1);
                 }
             }
-            int ret = inf;
-            rep(i, sz(vids) + 1)
+
+            rep(i, 40)
             {
-                rep(j, 40)
-                {
-                    if (dp[i][j] == -1) continue;
-                    if (dp[i][j] >= t)
-                    {
-                        ret = min(ret, j);
-                    }
-                }
+                if (dp[i] >= t) return i;
             }
-            return ret;
+            
+            return inf;
         };
 
 
@@ -91,7 +83,7 @@ signed main()
 
     int lo = -1;
     int hi = sz(ones) + 1;
-    while (lo+1<hi)
+    while (lo + 1 < hi)
     {
         int mid = (lo + hi) / 2;
         if (getvpref(mid) != inf)
@@ -101,7 +93,7 @@ signed main()
         else lo = mid;
     }
 
-    if (hi==sz(ones) + 1)
+    if (hi == sz(ones) + 1)
     {
         cout << "-1";
         return 0;
@@ -109,10 +101,10 @@ signed main()
     else
     {
         int ans = hi + getvpref(hi);
-        repp(i, hi + 1, sz(ones)+1)
+        repp(i, hi + 1, sz(ones) + 1)
         {
             if (i >= ans) break;
-            ans = min(ans, i+getvpref(i));
+            ans = min(ans, i + getvpref(i));
         }
         cout << ans;
     }
