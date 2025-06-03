@@ -1,0 +1,37 @@
+\problemname{Infinity alarm}
+
+It is the last evening of your trip abroad, and you need to get up early tomorrow
+to catch your flight. But then you find that your phone is broken and there is no 
+other alarm clock in the room. The only possible way to wake yourself up is to make 
+your computer overheat at the right moment, which would create a loud noise. You decide 
+to do this by coding up a complicated algorithm that after a number of steps creates an 
+infinitely large set of numbers.
+
+
+You are given a set of $N$ positive integers $S$. Let $f(S)$ be the set of positive integers $x$ such 
+that there is an odd number of elements in $S$ that are strictly smaller than $x$.
+
+Every second, the set $S$ gets replaced by $f(S)$. Your task is to calculate after
+how many seconds the set $S$ is infinitely big.
+
+\section*{Input}
+The first line contains one integer $N$ ($1 \leq N \leq 5 \cdot 10^5$).
+
+The second line contains $N$ integers $s_1, s_2, \dots, s_N$ ($1 \leq s_i \leq 10^9$), 
+the integers in $S$. These numbers will all be different.
+
+\section*{Output}
+Print one integer, the number of seconds until the set $S$ has infinitely many elements.
+
+\section*{Scoring}
+Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains
+a set of test cases. To get the points for a test group you need to solve all test cases in the test group.
+
+\noindent
+\begin{tabular}{| l | l | p{12cm} |}
+  \hline
+  \textbf{Group} & \textbf{Points} & \textbf{Constraints} \\ \hline
+  $1$    & $15$        & $N \leq 2$ \\ \hline
+  $2$    & $30$       & $N \leq 100$, $s_i \leq 3 \cdot 10^5$ \\ \hline
+  $3$    & $55$       & No additional constraints. \\ \hline
+\end{tabular}
