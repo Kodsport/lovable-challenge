@@ -3,14 +3,34 @@
 \illustration{0.3}{mugs.png}
 
 At Lovables office, they have some really cool coffee mugs. 
+Even though the mugs are so cool, we will model the mug as a simple object with 4 sides, `North', `West', `South', `East'.
 
+You have $M$ mugs indexed from $0$ to $M-1$ infront of you, and you are now tasked with transforming the mugs infront of you such that the `North' side is faced towards you.
+However, whoever gave you task allowed you to only do \textit{Magical Rotations}. A Magical Rotation consists of the following 3 steps:
+\begin{enumerate}
+  \item Pick an integer $a$ $(0 \leq a < M)$, and another integer $b$ $(0 \leq b < M-1)$, where $a \neq b$. Note that $b$ cannot be the last index. 
+  \item Switch the two mugs positioned at index $a$ and index $b$ without rotating any of them.
+  \item Finish by taking the mug that was at index $a$ and the mug now to the right of it, and rotate both by $90$ degrees.
+\end{enumerate}
 
+When rotating a mug $90$ degrees, 
+\begin{itemize}
+  \item A mug with `North' side facing you now has its `West' side facing you.
+  \item A mug with `West' side facing you now has its `South' side facing you.  
+  \item A mug with `South' side facing you now has its `East' side facing you.  
+  \item A mug with `East' side facing you now has its `North' side facing you.  
+\end{itemize}
+
+You wonder if it even is possible to rotate all the mugs infront of you such that the `North' side is faced towards you by only using Magiacal Rotations.
+To impress whoever gave you this task, you would like to use as few Magical Rotations as possible.
 
 \section*{Input}
+The first line contains one integer $M$ ($2 \leq M \leq 5 \cdot 10^5$), the number of cups infront of you.
 
+The second line contains a string of $M$ characters $c_1, c_2, \dots, c_M$ ($c_i \in \{`N',`W',`S',`E'\}$), the character representing the current side of the mug that is faced towards you.
 
 \section*{Output}
-Print one integer, the minimum number of moves such that all cups has the `North' side faced towards Viktor. If it is impossible, print $-1$. 
+Print one integer, the minimum number of Magical Rotations such that all mugs has the `North' side faced towards you. If it is impossible, print $-1$. 
 
 \section*{Scoring}
 Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains
@@ -20,7 +40,7 @@ a set of test cases. To get the points for a test group you need to solve all te
 \begin{tabular}{| l | l | p{12cm} |}
   \hline
   \textbf{Group} & \textbf{Points} & \textbf{Constraints} \\ \hline
-  $1$    & $15$        & $N \leq 2$ \\ \hline
-  $2$    & $30$       & $N \leq 100$, $s_i \leq 3 \cdot 10^5$ \\ \hline
-  $3$    & $55$       & No additional constraints. \\ \hline
+  $1$    & $15$       & From the start, all mugs either have their `North' or `East' side facing you. \\ \hline
+  $2$    & $25$       & $M \leq 100$ \\ \hline
+  $3$    & $60$       & No additional constraints. \\ \hline
 \end{tabular}
