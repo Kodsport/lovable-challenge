@@ -18,7 +18,6 @@ void run() {
     Endl();
     string a = Line();
 
-
     for (auto &ch:a) assert(ch == 'N' or ch == 'W' or ch == 'E' or ch == 'S');
     
     bool onlytwo = Arg("onlytwo", 0);

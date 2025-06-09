@@ -15,17 +15,12 @@ ans = 0
 
 c = Counter(a)
 
-for x in range(3,0,-1):
-    while c[x] > 6:
-        c[x] -= 2
-        c[0] += 2
-        ans += (4-x)%4
-
 vis = set()
 vis.add((c[0],c[1],c[2],c[3]))
 BFS = [[c[0],c[1],c[2],c[3],0]]
 for n,w,s,e,d in BFS:
 
+    
     if w == s == e == 0:
         ans += d
         break
@@ -46,6 +41,9 @@ for n,w,s,e,d in BFS:
             nxt[i] += 1
             nxt[j] += 1
 
-
+else:
+    print(-1)
+    exit()
+    #assert(0), "uh oh"
 
 print(ans)

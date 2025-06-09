@@ -7,10 +7,6 @@ dirtoind = {"N":0, "W":1, "S":2, "E":3}
 
 a = [*map(lambda x: dirtoind[x],[*input()])]
 
-if sum(a)%2:
-    print(-1)
-    exit()
-
 ans = 0
 
 c = Counter(a)
@@ -44,7 +40,9 @@ for n,w,s,e,d in BFS:
                 nxt[(j+1)%4] -= 1
             nxt[i] += 1
             nxt[j] += 1
-
+else:
+    print(-1)
+    exit()
 
 
 print(ans)
