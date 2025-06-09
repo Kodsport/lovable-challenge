@@ -11,19 +11,20 @@ typedef long long ll;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-const int MAXN = 500000;
-const int MAXS = 1000000000;
+const int MAXM = 500000;
 
 void run() {
-    int n = Int(1, Arg("maxn", MAXN));
-    int maxs = int(Arg("maxs", MAXS));
+    int m = Int(2, Arg("MAXM", MAXM));
     Endl();
-    vi s = SpacedInts(n, 1, maxs);
-    set<int> S;
-    trav(x, s){
-        S.insert(x);
-    }
-    assert(sz(S) == n);
+    string a = Line();
+
+
+    for (auto &ch:a) assert(ch == 'N' or ch == 'W' or ch == 'E' or ch == 'S');
+    
+    bool onlytwo = Arg("onlytwo", 0);
+    if (onlytwo) for (auto &ch:a) assert(ch == 'N' or ch == 'E');
+
+    assert(sz(a) == m);
 
     Eof();
 }
