@@ -2,35 +2,37 @@
 
 \illustration{0.3}{mugs.jpg}
 
-At Lovables office, they have some really cool coffee mugs. 
-Even though the mugs are so cool, we will model the mug as a simple object with 4 sides, `North', `West', `South', `East'.
+At Lovable's office, they have some really cool coffee mugs. 
+Even though the mugs are cool, we model each mug as a simple object with four sides: \texttt{North}, \texttt{West}, \texttt{South}, and \texttt{East}.
 
-You have $M$ mugs indexed from $0$ to $M-1$ infront of you, and you are now tasked with transforming the mugs infront of you such that the `North' side is faced towards you.
-However, whoever gave you task allowed you to only do \textit{Magical Rotations}. A Magical Rotation consists of the following 3 steps:
+You have $M$ mugs, indexed from $0$ to $M-1$, in front of you, 
+and your task is to rotate the mugs so that the \texttt{North} side faces you. 
+However, you may perform only \emph{magical rotations}. 
+A magical rotation consists of the following three steps:
 \begin{enumerate}
-  \item Pick an integer $a$ $(0 \leq a < M)$, and another integer $b$ $(0 \leq b < M-1)$, where $a \neq b$. Note that $b$ cannot be the last index. 
-  \item Switch the two mugs positioned at index $a$ and index $b$ without rotating any of them.
-  \item Finish by taking the mug that was at index $a$ and the mug now to the right of it, and rotate both by $90$ degrees.
+  \item Choose integers $a$ and $b$ such that $0 \le a < M$, $0 \le b < M-1$, and $a \neq b$. Note that $b$ cannot be the last index.
+  \item Swap the mugs at indices $a$ and $b$ without rotating them.
+  \item Take the mug now at index $a$ (the one moved from index $b$) and its neighbor to the right, then rotate both by $90^\circ$.
 \end{enumerate}
 
-When rotating a mug $90$ degrees, 
+When rotating a mug by $90^\circ$:
 \begin{itemize}
-  \item A mug with `North' side facing you now has its `West' side facing you.
-  \item A mug with `West' side facing you now has its `South' side facing you.  
-  \item A mug with `South' side facing you now has its `East' side facing you.  
-  \item A mug with `East' side facing you now has its `North' side facing you.  
+  \item A mug with its \texttt{North} side facing you will now have its \texttt{West} side facing you.
+  \item A mug with its \texttt{West} side facing you will now have its \texttt{South} side facing you.
+  \item A mug with its \texttt{South} side facing you will now have its \texttt{East} side facing you.
+  \item A mug with its \texttt{East} side facing you will now have its \texttt{North} side facing you.
 \end{itemize}
 
-You wonder if it even is possible to rotate all the mugs infront of you such that the `North' side is faced towards you by only using Magiacal Rotations.
-To impress whoever gave you this task, you would like to use as few Magical Rotations as possible.
+You may wonder whether it is possible to arrange all the mugs so that their \texttt{North} sides face you using only magical rotations. To impress the task assigner, you would like to minimize the number of magical rotations.
 
+If you do not have enough mugs on hand to experiment, you can use this \href{https://rotatingmugs.lovable.app/}{website}, created by Lovable, to simulate the magical rotations.
 \section*{Input}
-The first line contains one integer $M$ ($2 \leq M \leq 5 \cdot 10^5$), the number of cups infront of you.
+The first line contains an integer $M$ ($2 \leq M \leq 5 \cdot 10^5$), the number of cups infront of you.
 
-The second line contains a string of $M$ characters $c_1, c_2, \dots, c_M$ ($c_i \in \{``N'',``W'',``S'',``E''\}$), the character representing the current side of the mug that is faced towards you.
+The second line contains a string of $M$ characters $c_1, c_2, \dots, c_M$, where $c_i \in \{``N'',``W'',``S'',``E''\}$ denotes the side of the $i$-th mug currently facing you.
 
 \section*{Output}
-Print one integer, the minimum number of Magical Rotations such that all mugs has the `North' side faced towards you. If it is impossible, print $-1$. 
+Print a single integer: the minimum number of magical rotations required to make all mugs face the \texttt{North} side toward you. If it is impossible, print \(-1\).
 
 \section*{Scoring}
 Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains
@@ -44,3 +46,6 @@ a set of test cases. To get the points for a test group you need to solve all te
   $2$    & $25$       & $M \leq 100$ \\ \hline
   $3$    & $60$       & No additional constraints. \\ \hline
 \end{tabular}
+
+
+%\section*{Explanation of samples}

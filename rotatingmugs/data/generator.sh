@@ -15,6 +15,7 @@ MAXM=500000
 samplegroup
 sample 1
 sample 2
+sample 3
 
 group group1 15
 limits onlytwo=1
@@ -32,6 +33,7 @@ group group2 25
 limits MAXM=100
 tc 1
 tc 2
+tc 3
 tc onlytwo-1
 tc onlytwo-2
 tc onlytwo-3
