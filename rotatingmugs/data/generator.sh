@@ -69,7 +69,8 @@ tc small-25 gen_rand M=100 w=7 e=93
 tc small-26 gen_rand M=100 s=10 w=13 e=77
 tc small-27 gen_rand M=99 n=2 s=1 e=96
 tc small-28 gen_rand M=100 n=3 s=1 e=96
-
+tc small-29 gen_rand M=3 a="NEW"
+tc small-30 gen_rand M=100 n=98 e=1 w=1
 
 group group3 60
 include_group group1
@@ -82,3 +83,4 @@ tc large-05 gen_rand M=300001 s=1 e=300000
 tc large-06 gen_rand M=300001 s=1 w=1 e=299997
 tc large-07 gen_rand M=400004 w=100001 e=300003
 tc large-08 gen_rand M=500000 s=10001 w=20001 e=469998
+tc large-09 gen_rand M=$MAXM n=$(($MAXM-2)) e=1 w=1
