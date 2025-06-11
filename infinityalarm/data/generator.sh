@@ -41,23 +41,25 @@ tc two-fix-12 gen_rand mode=two x=262145 shift=10
 group group2 30
 limits maxn=100 maxs=1000000
 tc 1
-tc small-1 gen_rand n=100 s=1000000
-tc small-2 gen_rand n=100 s=1000000
-tc small-3 gen_rand n=100 s=1000000
-tc small-4 gen_rand n=100 s=1000000
-tc small-5 gen_rand n=100 s=1000000
-tc small-biganswer-1 gen_rand n=100 s=1000000 p=5 mode=power
-tc small-biganswer-2 gen_rand n=100 s=1000000 p=10 mode=power
-tc small-biganswer-3 gen_rand n=100 s=1000000 p=15 mode=power
-tc small-biganswer-4 gen_rand n=100 s=1000000 p=18 mode=power
-tc small-biganswer-5 gen_rand n=100 s=1000000 p=18 mode=power
-tc small-odd gen_rand n=99 s=1000000
-tc small-ap-1 gen_rand n=32 s=1000000 d=16384 mode=ap
-tc small-ap-2 gen_rand n=4 s=1000000 d=262144 mode=ap
-tc small-rec-1 gen_rand n=100 s=1000000 mode=recursive
-tc small-rec-2 gen_rand n=100 s=1000000 mode=recursive
-tc small-rec-3 gen_rand n=100 s=1000000 mode=recursive
-tc small-rec-4 gen_rand n=100 s=1000000 mode=recursive
+tc small-1 gen_rand n=100 s=300000
+tc small-2 gen_rand n=100 s=300000
+tc small-3 gen_rand n=100 s=300000
+tc small-4 gen_rand n=100 s=300000
+tc small-5 gen_rand n=100 s=300000
+tc small-biganswer-1 gen_rand n=100 s=300000 p=5 mode=power
+tc small-biganswer-2 gen_rand n=100 s=300000 p=10 mode=power
+tc small-biganswer-3 gen_rand n=100 s=300000 p=15 mode=power
+tc small-biganswer-4 gen_rand n=100 s=300000 p=16 mode=power
+tc small-biganswer-5 gen_rand n=100 s=300000 p=16 mode=power
+tc small-odd gen_rand n=99 s=300000
+tc small-ap-1 gen_rand n=32 s=300000 d=8192 mode=ap
+tc small-ap-2 gen_rand n=4 s=300000 d=65536 mode=ap
+tc small-rec-1 gen_rand n=100 s=300000 mode=recursive
+tc small-rec-2 gen_rand n=100 s=300000 mode=recursive
+tc small-rec-3 gen_rand n=100 s=300000 mode=recursive
+tc small-rec-4 gen_rand n=100 s=300000 mode=recursive
+tc small-lucas-1 gen_rand x=73 gap=1024 c=2 mode=lucas
+tc small-lucas-2 gen_rand x=6 gap=2048 c=16 mode=lucas
 tc two-fix-11
 tc two-fix-12
 
@@ -85,3 +87,8 @@ tc large-rec-3 gen_rand n=$MAXN s=$MAXS mode=recursive
 tc large-rec-4 gen_rand n=$MAXN s=$MAXS mode=recursive
 tc large-rec-5 gen_rand n=$MAXN s=$MAXS mode=recursive
 tc large-rec-6 gen_rand n=$MAXN s=$MAXS mode=recursive
+tc large-lucas-1 gen_rand x=20 gap=16384 c=16384 mode=lucas
+tc large-lucas-2 gen_rand x=1028 gap=16384 c=10000 mode=lucas
+tc large-lucas-3 gen_rand x=232812 gap=536870912 c=2 mode=lucas
+tc large-lucas-4 gen_rand x=42812 gap=134217728 c=8 mode=lucas
+tc large-lucas-5 gen_rand x=196608 gap=936870912 c=2 mode=lucas

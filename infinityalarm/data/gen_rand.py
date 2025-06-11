@@ -99,6 +99,21 @@ elif mode == "ap":
 elif mode == "recursive":
     S = rec(s, n)
     n = len(S)
+    
+elif mode == "lucas":
+    x = int(cmdlinearg('x'))
+    gap = int(cmdlinearg('gap'))
+    c = int(cmdlinearg('c'))
+    L = []
+    for i in range(0, x):
+        if i|(x-1) == (x-1):
+            L.append(i+1)
+    for i in range(c):
+        L2 = L.copy()
+        for j in range(len(L2)):
+            L2[j] += gap*i
+        S += L2
+    n = len(S)
 
 print(n)
 print(*S)
