@@ -95,7 +95,7 @@ signed main()
 
     if (hi == sz(ones) + 1)
     {
-        cout << "-1";
+        cout << "-1\n";
         return 0;
     }
     else
@@ -106,7 +106,7 @@ signed main()
             if (i >= ans) break;
             ans = min(ans, i + getvpref(i));
         }
-        cout << ans;
+        cout << ans << "\n";
     }
 
     return 0;
