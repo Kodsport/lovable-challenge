@@ -23,7 +23,7 @@ int R[2][SQRT] = {0};
 
 int rnd(int i, int r){
     if(R[r][i] == 0){
-        R[r][i] = rand();
+        R[r][i] = rand()%SQRT+1;
     }
     return R[r][i];
 }
