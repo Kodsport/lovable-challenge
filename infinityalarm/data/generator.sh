@@ -5,7 +5,7 @@ PPATH=$(realpath ..)
 
 #ulimit -s unlimited
 
-use_solution nils.cpp
+use_solution nils_deterministic.cpp
 
 compile gen_rand.py
 
@@ -35,6 +35,8 @@ tc two-fix-7 gen_rand mode=two  x=209226753
 tc two-fix-8 gen_rand mode=two  x=800000009
 tc two-fix-9 gen_rand mode=two  x=999999999
 tc two-fix-10 gen_rand mode=two x=1000000000
+tc two-fix-11 gen_rand mode=two  x=32769 shift=32769
+tc two-fix-12 gen_rand mode=two x=262145 shift=10
 
 group group2 30
 limits maxn=100 maxs=1000000
@@ -56,6 +58,8 @@ tc small-rec-1 gen_rand n=100 s=1000000 mode=recursive
 tc small-rec-2 gen_rand n=100 s=1000000 mode=recursive
 tc small-rec-3 gen_rand n=100 s=1000000 mode=recursive
 tc small-rec-4 gen_rand n=100 s=1000000 mode=recursive
+tc two-fix-11
+tc two-fix-12
 
 group group3 55
 include_group group1

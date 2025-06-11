@@ -55,7 +55,8 @@ if mode == "random":
     S = list(random.sample(range(1, s+1), n))
 elif mode == "two":
     x = int(cmdlinearg('x'))
-    S = [1, x]
+    shift = int(cmdlinearg('shift',0))
+    S = [1+shift, x+shift]
     n = 2
 elif mode == "power":
     assert n%2 == 0
