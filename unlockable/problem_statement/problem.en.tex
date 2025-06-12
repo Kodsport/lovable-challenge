@@ -1,19 +1,21 @@
 \problemname{Unlockable}
 
-It's time to lock in. However... you've lost the keys to your locks.
+\illustration{0.3}{lock.png}
+\noindent
+It's time to \uline{lock in}. However... you've lost the keys to your locks.
 
 You have $N$ locks that all share a common integer $a > 1$. Each lock is associated with its own integer $b_i$.
 A key can be described by a pair of positive integers $(x,y)$, and it will unlock a lock with $b_i$ if it satisfies $ya^x = b_i$.
 
-Find all possible keys $(x,y)$ that fulfills $ya^x = b_i$ for at least one $b_i$.
+Find all possible keys $(x,y)$ such that $ya^x = b_i$ for at least one $b_i$.
 
 \section*{Input}
-The first line contains two integers $N$ and $a$ ($1 \leq N \leq 2 \cdot 10^5$, $1 < a \leq 10^9$), the number of locks you have and the common integer $a$.
+The first line contains two integers $N$ and $a$ ($1 \leq N \leq 2 \cdot 10^5$, $1 < a \leq 10^9$), the number of locks and the common integer $a$.
 
-The second line contains a $N$ integers $b_1, b_2, \dots, b_N$, where $1 \leq b_i \leq 10^9$ denotes the integer that describes the $i$-th lock.
+The second line contains a $N$ integers $b_1, b_2, \dots, b_N$ $(1 \leq b_i \leq 10^9)$, where $b_i$ denotes the integer that describes the $i$-th lock.
 
 \section*{Output}
-Print a single integer: the number of pairs of positive integers $(x,y)$ that satisfies $ya^x = b_i$ for some $i$ $(1\leq i \leq N)$.
+Print a single integer: the number of pairs of positive integers $(x,y)$ that satisfies $ya^x = b_i$ for at least one $i$ $(1\leq i \leq N)$.
 
 \section*{Scoring}
 Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains
