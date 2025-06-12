@@ -89,7 +89,7 @@ public:
             double cross_x = (g0 - f0) / (f_slope - g_slope);
             h.breakpoints.push_back({ cross_x, std::abs(f_slope - g_slope) });
             h.left_slope = std::min(f_slope, g_slope);
-            h.base_value = (f_slope > g_slope) ? f0 : g0;
+            h.base_value = std::max(f0, g0);
             return h;
         }
 
@@ -107,7 +107,7 @@ public:
             events.push({ bp.first, {0, bp.second} });
         for (const auto& bp : g.breakpoints)
             events.push({ bp.first, {1, bp.second} });
-        if (0.0 > x0)
+        if (0.0 >= x0)
             events.push({ 0.0, {-1, 0.0} });  // Special event to record value at 0
 
         // Initialize values and slopes

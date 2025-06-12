@@ -1,4 +1,4 @@
-// knows about optimal order argument. O(N^2)
+// knows about optimal order argument. O(???)
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -22,9 +22,6 @@ inline void fast() { cin.tie(0)->sync_with_stdio(0); }
 #define assert(x) if (!(x)) __debugbreak()
 #endif
 
-// chatgpt-generated code.
-// fast representation of piecewise linear convex functions
-// can apply affine transformations, evaluate point and take max with another function
 class PLConvexFunc {
 public:
     double base_value;  // Value at x=0
@@ -90,7 +87,6 @@ public:
             h.breakpoints.push_back({ cross_x, std::abs(f_slope - g_slope) });
             h.left_slope = std::min(f_slope, g_slope);
             h.base_value = std::max(f0, g0);
-            assert(h.base_value > 0);
             return h;
         }
 
@@ -151,7 +147,7 @@ public:
             double cross_x = std::numeric_limits<double>::lowest();
             if (f_slope != g_slope) {
                 cross_x = cur_x + (g_val - f_val) / (f_slope - g_slope);
-                if (cross_x > cur_x && cross_x < next_x) {
+                if (cross_x - cur_x > 1e-9 && cross_x < next_x) {
                     events.push({ next_x, {type, delta} });
                     next_x = cross_x;
                     step = next_x - cur_x;
@@ -191,7 +187,6 @@ public:
         if (h.breakpoints.empty()) {
             h.left_slope = init_h_slope;
             h.base_value = init_h_val - init_h_slope * x0;
-            assert(h.base_value > 0);
         }
         else {
             h.left_slope = init_h_slope;
@@ -203,7 +198,6 @@ public:
                 }
                 h.base_value = init_h_val + integral;
             }
-            assert(h.base_value > 0);
         }
 
         // Sort breakpoints (should already be sorted, but ensure)
@@ -249,33 +243,9 @@ signed main()
         }
     }
 
-    int ans = inf;
-    int p = 0;
-
-    auto min_nonone = [&](int p)
-        {
-            rep(j, sz(fn))
-            {
-                if (fn[j].evaluate_at(p) >= t)
-                {
-                    return j;
-                }
-            }
-            return inf;
-        };
-
-    rep(i, sz(ones))
-    {
-        ans = min(ans, i + min_nonone(p));
-        p += ones[i];
-    }
-    ans = min(ans, sz(ones) + min_nonone(p));
-    if (ans == inf) ans = -1;
-    cout << ans << "\n";
-    //rep(i, 36)
-    //{
-    //    cout << fn[i].breakpoints.size() << "\n";
-    //}
+    int tot_bp = 0;
+    rep(i, 36) tot_bp += sz(fn[i].breakpoints);
+    cout << tot_bp;
 
     return 0;
 }
