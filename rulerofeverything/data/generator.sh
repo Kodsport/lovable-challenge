@@ -16,7 +16,7 @@ samplegroup
 limits maxn=10
 sample 1
 
-group group1 3
+group group1 2
 limits maxn=10
 include_group sample
 include_group group1
@@ -40,7 +40,7 @@ tc_manual ../manual-tests/floaterror-3.in
 tc_manual ../manual-tests/floaterror-5.in
 tc_manual ../manual-tests/kill-wronghull.in
 
-group group2 12
+group group2 13
 limits maxn=20
 include_group group1
 tc_manual ../manual-tests/floaterror-2.in
@@ -91,16 +91,16 @@ tc g4-11 gen_evenlysplit n=1000 g=3
 tc g4-12 gen_bighull n=1000 maxb=100000
 
 group group5 30
-limits maxn=100000
+limits maxn=200000
 include_group group4
 for i in {1..5}
 do
-    tc g5-$i gen_rand n=100000
+    tc g5-$i gen_rand n=200000
 done
-tc g5-6 gen_manybig n=100000
-tc g5-7 gen_manybig n=100000
-tc g5-8 gen_manybig n=100000
-tc g5-9 gen_evenlysplit n=100000 g=1
-tc g5-10 gen_evenlysplit n=100000 g=2
-tc g5-11 gen_evenlysplit n=100000 g=3
-tc g5-12 gen_bighull n=100000 maxb=100000
+tc g5-6 gen_manybig n=200000
+tc g5-7 gen_manybig n=200000
+tc g5-8 gen_manybig n=200000
+tc g5-9 gen_evenlysplit n=200000 g=1
+tc g5-10 gen_evenlysplit n=200000 g=2
+tc g5-11 gen_evenlysplit n=200000 g=3
+tc g5-12 gen_bighull n=200000 maxb=100000

@@ -13,14 +13,18 @@ Because you are impatient, you might change your mind about $K$. In fact, you ha
 for $Q$ different values of $K$.
 
 \section*{Input}
-The first line of input contains the integers $N$ and $K$ ($1 \le N \le 10^5$, $1 \leq K \leq 8 \cdot 10^9$), the number video ideas
-and how many followers you want.
+The first line of input contains the integers $N$ and $Q$ ($1 \le N \le 2 \cdot 10^5$), the number video ideas
+and how follower amounts you want to consider.
 
 The following each lines describe your video ideas. Each line contains two integers $a$ and $b$ ($1 \leq a, b \leq 10^5$),
 whose meaning is explained above.
 
+The final line contains $Q$ integers $K_1, K_2, \dots, K_N$ ($1 \leq K_i \leq 10^9$), the different follow counts
+you want to consider.
+
 \section*{Output}
-Print an integer: the smallest number of videos you need to release to get $K$ followers.
+For each $K_i$, print the smallest number of videos you need to release to get $K_i$ followers.
+Print all of these answers on a single line.
 
 \section*{Scoring}
 Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains
@@ -34,7 +38,8 @@ a set of test cases. To get the points for a test group you need to solve all te
   $2$    & $13$       & $Q \leq 5, N \leq 20$ \\ \hline
   $3$    & $20$       & $Q \leq 5, N \leq 1000$ \\ \hline
   $4$    & $25$       & $Q \leq 5$ \\ \hline
-  $5$    & $40$       & No additional constraints. \\ \hline
+  $5$    & $30$       & $Q \leq 10^4$ \\ \hline
+  $6$    & $10$       & No additional constraints. \\ \hline
 \end{tabular}
 
 \section*{Explanation of Sample 1}

@@ -22,10 +22,12 @@ maxk = int(cmdlinearg('maxk', 1e9))
 k = randint(1, maxk)
 print(n,k)
 taken = 0
-for i in range(1, n+1):
+for i in range(1, min(int(1e5+1), n+1)):
     for j in range(g):
         if taken >= n:
             break
         print(i, randint(1, 100))
         taken += 1
-
+while taken < n:
+    print(randint(1, 100), randint(1, 100))
+    taken+=1
