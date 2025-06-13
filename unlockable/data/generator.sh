@@ -62,3 +62,4 @@ tc large-6 gen_rand N=$MAXN a=1025 mode=dense
 tc large-7 gen_rand N=$MAXN a=1024 mode=dense
 tc large-8 gen_rand N=$MAXN a=60466176 mode=unique
 tc large-9 gen_rand N=$MAXN a=536870912 mode=unique
+tc_manual ../manual/bigcase.in
