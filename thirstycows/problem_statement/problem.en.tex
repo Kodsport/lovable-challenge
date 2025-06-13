@@ -1,0 +1,33 @@
+\problemname{Thirsty Cows}
+
+The water level has been changing a lot lately, and there is a thirsty cow by the water that could change that!
+
+You have gotten the information regarding what the water level will be the coming $N$ days. 
+On any given day $i$, the water level will be $a_i$. 
+If you let the thirsty cow drink water that day, the cow will be able to greedily drink $a_i$ water units. 
+By letting the thirsty cow drink, it will also decrease the water level of all days after that by $a_i$ units. 
+Note that the cow can only drink when there is a positive amount of water units that day.
+
+Since the thirsty cow is extremly thirsty, the cow wants to drink as much water as possble in total over all $N$ days. 
+Could you help the thirsy cow figure out how much it could drink?
+
+\section*{Input}
+The first line contains an integer $N$ ($1 \leq N \leq 3 \cdot 10^5$), the number of days as described above.
+
+The second line contains $N$ integers, $a_1, a_2, \dots, a_N$ $(1 \leq a_i \leq 10^9)$, where $a_i$ denotes the water level on the $i$-th day.
+
+\section*{Output}
+Print a single integer: the maximum amount of water units the thirsy cow can drink across all $N$ days. 
+
+\section*{Scoring}
+Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains
+a set of test cases. To get the points for a test group you need to solve all test cases in the test group.
+
+\noindent
+\begin{tabular}{| l | l | p{12cm} |}
+  \hline
+  \textbf{Group} & \textbf{Points} & \textbf{Constraints} \\ \hline
+  $1$    & $19$       & $N \leq 200$ \\ \hline
+  $2$    & $29$       & $N \leq 3000$ \\ \hline
+  $3$    & $52$       & No additional constraints. \\ \hline
+\end{tabular}
