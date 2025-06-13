@@ -27,6 +27,8 @@ tc smallab-4 gen_rand N=59 a=7 mode=unique MAXA=100
 tc smallab-5 gen_rand N=$MAXN MAXA=100
 tc smallab-6 gen_rand N=$MAXN MAXA=100
 tc smallab-7 gen_rand N=30 a=2 mode=dense MAXA=100
+tc smallab-8 gen_rand N=100 a=64 MAXA=100
+tc smallab-9 gen_rand N=100 a=64 mode=unique MAXA=100
 
 group group2 33
 limits prime=1
@@ -50,10 +52,13 @@ tc prime-11 gen_rand N=$MAXN a=55109 mode=unique
 group group3 45
 include_group group1
 include_group group2
+tc_manual ../manual/floatpointexception.in
 tc large-1 gen_rand N=10 a=1258
-tc large-2 gen_rand N=$MAXN a=99
+tc large-2 gen_rand N=$MAXN a=99 MAXA=100000
 tc large-3 gen_rand N=$MAXN a=120 mode=unique
 tc large-4 gen_rand N=$MAXN a=25 mode=dense
 tc large-5 gen_rand N=$MAXN a=108 mode=dense
 tc large-6 gen_rand N=$MAXN a=1025 mode=dense
 tc large-7 gen_rand N=$MAXN a=1024 mode=dense
+tc large-8 gen_rand N=$MAXN a=60466176 mode=unique
+tc large-9 gen_rand N=$MAXN a=536870912 mode=unique
