@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+n = int(input())
 s = input()
 
 if "lv" in s:

@@ -30,7 +30,7 @@ signed main()
     {
         cout << 0;
     }
-    else if (s.find("l") != string::npos || s.find("v") != string::npos)
+    if (s.find("l") != string::npos || s.find("v") != string::npos)
     {
         cout << 1;
     }

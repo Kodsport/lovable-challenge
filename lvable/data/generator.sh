@@ -5,37 +5,33 @@ PPATH=$(realpath ..)
 
 #ulimit -s unlimited
 
-use_solution oneliner.py
+use_solution harry.py
 
 compile gen_rand.py
 
-MAXN=300000
+MAXN=500000
 
 
 samplegroup
 sample 1
 sample 2
+sample 3
 
 
-group group1 19
-limits MAXN=200 MAXA=200
+group group1 40
+limits MAXN=100
 include_group sample
-tc small-1 gen_rand N=1 MAXA=200
-tc small-2 gen_rand N=10 MAXA=200
-tc small-3 gen_rand N=100 MAXA=200
-tc small-4 gen_rand N=200 MAXA=200
+tc small-1 gen_rand N=1 
+tc small-2 gen_rand N=10 
+tc small-3 gen_rand N=100 mode=nolv 
+tc small-4 gen_rand N=100 mode=nolnov
+tc small-5 gen_rand N=100 
 
-group group2 29
-limits MAXN=3000
+group group2 60
 include_group group1
-tc medium-1 gen_rand N=10 
-tc medium-2 gen_rand N=1000 
-tc medium-3 gen_rand N=2000 
-tc medium-4 gen_rand N=3000 
+tc large-1 gen_rand N=$MAXN mode=nolv
+tc large-2 gen_rand N=$MAXN mode=nolnov
+tc large-3 gen_rand N=$MAXN mode=nolnov
+tc large-4 gen_rand N=$MAXN mode=nolv
+tc large-5 gen_rand N=$MAXN
 
-group group3 52
-include_group group2
-tc large-1 gen_rand N=100000 
-tc large-2 gen_rand N=200000 
-tc large-3 gen_rand N=300000 
-tc large-4 gen_rand N=300000 

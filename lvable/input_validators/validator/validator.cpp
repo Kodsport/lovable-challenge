@@ -11,13 +11,16 @@ typedef long long ll;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-const int MAXN = 300000;
+const int MAXN = 500000;
 
 void run() {
-    int MAXA = Arg("MAXA", 1e9);
     int N = Int(1, Arg("MAXN", MAXN));
     Endl();
-    vi a = SpacedInts(N, 1, MAXA);
+    string s = Line();
+
+    for (auto &ch: s) assert('a' <= ch and ch <= 'z');
+
+    assert(sz(s) == N);
 
     Eof();
 }

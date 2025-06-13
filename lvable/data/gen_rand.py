@@ -15,21 +15,47 @@ def cmdlinearg(name, default=None):
     return default
 
 
-MAXN = 3 * 10**5
+MAXN = 5 * 10**5
 
 
 random.seed(int(cmdlinearg('seed', sys.argv[-1])))
 N = int(cmdlinearg('N', MAXN))
-MAXA = int(cmdlinearg('MAXA', 1e9))
+
+alfa = "qwertyuiopasdfghjklzxcvbnm"
 
 mode = cmdlinearg('mode', "random")
 
 if mode == "random":
-    a = [random.randint(1,MAXA) for _ in range(N)]
+    s = [random.choice(alfa) for _ in range(N)]
+    s = "".join(s)
+
+elif mode == "nolv":
+    s = []
+    while len(s) < N:
+        s.append(random.choice(alfa))
+
+        if len(s) > 1:
+            if s[-2] == "l" and s[-1] == "v":
+                s.pop()
+                s.pop()
+    
+    s = "".join(s)
+
+elif mode == "nolnov":
+    s = []
+    while len(s) < N:
+        s.append(random.choice(alfa))
+
+        
+        if s[-1] == "l" or s[-1] == "v":
+            s.pop()
+    
+    s = "".join(s)
+
 else:
     assert(0), "mode does not exist"
 
 print(N)
 #random.shuffle(a)
-print(*a)
+print(s)
 
