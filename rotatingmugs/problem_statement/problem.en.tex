@@ -14,6 +14,9 @@ A magical rotation consists of the following three steps:
   \item Swap the mugs at indices $a$ and $b$ without rotating them.
   \item Take the mug now at index $b$ (the one moved from index $a$) and its neighbor to the right, then rotate both by $90^\circ$.
 \end{enumerate}
+Note that a magical rotation has to contain all three steps, including swapping the mugs as well as rotating them afterwards.
+
+
 
 When rotating a mug by $90^\circ$:
 \begin{itemize}
@@ -63,8 +66,8 @@ There exist no sequence of magical rotations that can achieve this in fewer than
 \noindent
 In the second sample, we start out with the mugs in the state \texttt{ESE}. We do the following two magical rotations:
 \begin{itemize}
-  \item Choosing $a = 2$, $b = 1$ will switch the positions of the mugs, leading to \texttt{EES}. Then we rotate the mugs now at position $b = 1$, and the one to the right of it by $90^\circ$, resulting in \texttt{ENE}.
-  \item Choosing $a = 0$, $b = 1$ will switch the lead to \texttt{NEE}. Rotating the mug now at $b = 1$ and the one to the right of it results in \texttt{NNN}.
+  \item Choosing $a = 2$, $b = 1$ will first switch the positions of the mugs, leading to \texttt{EES}. Then we rotate the mugs now at position $b = 1$, and the one to the right of it by $90^\circ$, resulting in \texttt{ENE}.
+  \item Choosing $a = 0$, $b = 1$ will first switch the labels to \texttt{NEE}. Rotating the mug now at $b = 1$ and the one to the right of it results in \texttt{NNN}.
 \end{itemize}
 There exist no sequence of magical rotations that can achieve this in fewer than 2 moves.
 \begin{figure}[h!]

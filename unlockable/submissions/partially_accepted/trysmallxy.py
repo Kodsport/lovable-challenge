@@ -6,10 +6,10 @@ largest = max(list(b))
 
 out = 0
 
-for x in range(1,1000):
+for x in range(1,100):
     if a**x > largest:
         break
-    for y in range(1,1000):
+    for y in range(1,100):
         if y*a**x in b:
             out += 1
 print(out)
