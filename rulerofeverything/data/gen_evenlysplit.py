@@ -16,9 +16,16 @@ def cmdlinearg(name, default=None):
 
 random.seed(int(cmdlinearg('seed', sys.argv[-1])))
 n = int(cmdlinearg('n'))
+g = int(cmdlinearg('g'))
 maxk = int(cmdlinearg('maxk', 1e9))
 
 k = randint(1, maxk)
 print(n,k)
-for i in range(n):
-    print(randint(1, 5),randint(1, 100))
+taken = 0
+for i in range(1, n+1):
+    for j in range(g):
+        if taken >= n:
+            break
+        print(i, randint(1, 100))
+        taken += 1
+

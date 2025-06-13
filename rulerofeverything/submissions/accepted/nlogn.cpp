@@ -46,8 +46,6 @@ signed main()
             return (a.second) * (b.first - 1) > b.second * (a.first - 1);
         });
 
-    int ans = inf;
-
     vvi dp(sz(vids) + 1, vi(40, -1));
 
     auto tryv = [&](int start)

@@ -22,14 +22,15 @@ inline void fast() { cin.tie(0)->sync_with_stdio(0); }
 #define assert(x) if (!(x)) __debugbreak()
 #endif
 
-vi bestat(40);
+int best = inf;
 int t;
 
 void rec(int taken, int subs, map<int, int>& groupind, map<int, vi>& vids)
 {
-    bestat[taken] = max(bestat[taken], subs);
+    if (taken >= best) return;
     if (subs >= t)
     {
+        best = taken;
         return;
     }
 
@@ -37,7 +38,7 @@ void rec(int taken, int subs, map<int, int>& groupind, map<int, vi>& vids)
     {
         if (groupind[vid.first] == sz(vid.second)) continue;
         groupind[vid.first]++;
-        rec(taken + 1, subs * vid.first + vid.second[groupind[vid.first]-1], groupind, vids);
+        rec(taken + 1, subs * vid.first + vid.second[groupind[vid.first] - 1], groupind, vids);
         groupind[vid.first]--;
     }
 }
@@ -49,18 +50,14 @@ signed main()
     int n;
     cin >> n >> t;
 
-    vi ones;
 
     vector<p2> vids;
     rep(i, n)
     {
         int a, b;
         cin >> a >> b;
-        if (a == 1) ones.push_back(b);
-        else vids.emplace_back(a, b);
+        vids.emplace_back(a, b);
     }
-    sort(all(ones));
-    reverse(all(ones));
 
     map<int, vi> groups;
     for (auto& v : vids)
@@ -75,31 +72,13 @@ signed main()
         reverse(all(g.second));
     }
 
-    int ans = inf;
     auto tryv = [&](int start)
         {
+            best = inf;
             rec(0, start, groupind, groups);
-            int ans = inf;
-
-            rep(i, 40)
-            {
-                if (bestat[i] >= t)
-                {
-                    ans = min(ans, i);
-                    continue;
-                }
-            }
-            return ans;
+            return best;
         };
-
-    ans = min(ans, tryv(0));
-    int s = 0;
-    rep(numtake, sz(ones))
-    {
-        s += ones[numtake];
-        ans = min(ans, numtake + 1 + tryv(s));
-    }
-    
+    int ans = tryv(0);
 
     if (ans == inf)
     {

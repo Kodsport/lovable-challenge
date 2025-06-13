@@ -243,9 +243,34 @@ signed main()
         }
     }
 
-    int tot_bp = 0;
-    rep(i, 36) tot_bp += sz(fn[i].breakpoints);
-    cout << tot_bp;
+
+    int ans = inf;
+    int p = 0;
+
+    auto min_nonone = [&](int p)
+        {
+            rep(j, sz(fn))
+            {
+                if (fn[j].evaluate_at(p) >= t)
+                {
+                    return j;
+                }
+            }
+            return inf;
+        };
+
+    rep(i, sz(ones))
+    {
+        ans = min(ans, i + min_nonone(p));
+        p += ones[i];
+    }
+    ans = min(ans, sz(ones) + min_nonone(p));
+    if (ans == inf) ans = -1;
+    cout << ans << "\n";
+
+    // int tot_bp = 0;
+    // rep(i, 36) tot_bp += sz(fn[i].breakpoints);
+    // cout << tot_bp;
 
     return 0;
 }

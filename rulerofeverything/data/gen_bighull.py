@@ -16,8 +16,20 @@ def cmdlinearg(name, default=None):
 
 random.seed(int(cmdlinearg('seed', sys.argv[-1])))
 n = int(cmdlinearg('n'))
+maxk = int(cmdlinearg('maxk', 1e9))
+mink = int(cmdlinearg('mink', 1e9))
+maxb = int(cmdlinearg('maxb', 1e9))
 
-t = randint(1, 100000)
-print(n,t)
-for i in range(1, n+1):
-    print(i, i*(i+1)//2)
+k = randint(mink, maxk)
+maxb = min(maxb, k-1)
+lines = []
+for i in range(2, n):
+    b = i*(i+1)//2
+    if b >= maxb:
+        break
+    lines.append(f"{i} {maxb - b}")
+while len(lines) < n:
+    lines.append(f"1 {randint(1, 100)}")
+print(len(lines), k)
+for line in lines:
+    print(line)

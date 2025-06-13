@@ -34,12 +34,7 @@ signed main()
     repe(v, vids) cin >> v.first >> v.second;
     sort(all(vids), [](p2 a, p2 b)
         {
-            if (a.first == 1)
-            {
-                if (b.first != 1) return true;
-                return a.second > b.second;
-            }
-            return (a.second) * (b.first - 1) > b.second * (a.first - 1);
+            return (a.second*b.first)+b.second > (b.second*a.first)+a.second;
         });
 
     int ans = inf;

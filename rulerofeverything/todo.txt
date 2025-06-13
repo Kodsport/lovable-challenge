@@ -1,3 +1,4 @@
 rulerofeverything:
-kill inversefact.cpp. also try memoized+binary search version of it
-fix nchooselogn
+testcases with opt or opt+1
+kill all slope tricks...
+queries

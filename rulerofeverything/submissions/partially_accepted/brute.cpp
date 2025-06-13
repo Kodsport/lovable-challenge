@@ -22,24 +22,24 @@ inline void fast() { cin.tie(0)->sync_with_stdio(0); }
 #define assert(x) if (!(x)) __debugbreak()
 #endif
 
-vi bestat(40);
 int t;
+int best = inf;
 
-void rec(int i, int taken, int subs, vi& used, vector<p2>& vids)
+void rec(int taken, int subs, vi& used, vector<p2>& vids)
 {
-    bestat[taken] = max(bestat[taken], subs);
-    if (subs>=t)
+    if (taken >= best) return;
+    if (subs >= t)
     {
+        best = taken;
         return;
     }
-    if (i == sz(vids)) return;
 
     int ans = inf;
     rep(i, sz(vids))
     {
         if (used[i]) continue;
         used[i] = 1;
-        rec(i + 1, taken + 1, subs * vids[i].first + vids[i].second, used, vids);
+        rec(taken + 1, subs * vids[i].first + vids[i].second, used, vids);
         used[i] = 0;
     }
 }
@@ -64,27 +64,24 @@ signed main()
     sort(all(ones));
     reverse(all(ones));
 
-    vi used(sz(vids));
-    rec(0, 0, 0, used, vids);
     int ans = inf;
 
-    rep(i, 40)
+    auto cost = [&](int start)
+        {
+            best = inf;
+            vi used(sz(vids));
+
+            rec(0, start, used, vids);
+            return best;
+        };
+
+    ans = min(ans, cost(0));
+    int p = 0;
+    rep(i, sz(ones))
     {
-        if (bestat[i]>=t)
-        {
-            ans = min(ans, i);
-            continue;
-        }
-        int s = 0;
-        rep(j, sz(ones))
-        {
-            s += ones[j];
-            if (bestat[i]+s>=t)
-            {
-                ans = min(ans, j + 1 + i);
-                break;
-            }
-        }
+        p += ones[i];
+        if (i + 1 >= ans) continue;
+        ans = min(ans, i + 1 + cost(p));
     }
 
     if (ans == inf)

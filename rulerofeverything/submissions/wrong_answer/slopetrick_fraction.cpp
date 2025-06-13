@@ -22,19 +22,38 @@ inline void fast() { cin.tie(0)->sync_with_stdio(0); }
 #define assert(x) if (!(x)) __debugbreak()
 #endif
 
+#if _LOCAL
+#include <__msvc_int128.hpp>
+typedef _Signed128 big_signed;
+#else
+typedef __int128_t big_signed;
+#endif
+
+
+big_signed gcd(big_signed a, big_signed b) {
+    while (b != 0) {
+        big_signed temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
 
 // Simple Fraction class for exact arithmetic
 class Fraction {
 public:
-    long long num;
-    long long den;
+    big_signed num;
+    big_signed den;
 
-    Fraction(long long n = 0, long long d = 1) {
+    Fraction(big_signed n = 0, big_signed d = 1) {
         if (d < 0) n = -n, d = -d;
-        long long g = std::gcd(n, d);
+        big_signed g = gcd(n, d);
         num = n / g;
         den = d / g;
     }
+#if _LOCAL
+    Fraction(ll n = 0, ll d = 1) : Fraction(big_signed(n), big_signed(d)) {}
+#endif
 
     Fraction operator+(const Fraction& o) const { return Fraction(num * o.den + o.num * den, den * o.den); }
     Fraction operator-(const Fraction& o) const { return Fraction(num * o.den - o.num * den, den * o.den); }
@@ -47,8 +66,6 @@ public:
     bool operator!=(const Fraction& o) const { return !(*this == o); }
     bool operator>(const Fraction& o) const { return o < *this; }
     bool operator>=(const Fraction& o) const { return o <= *this; }
-
-    double to_double() const { return static_cast<double>(num) / den; }
 };
 
 // Piecewise-linear convex function using Fractions
@@ -187,6 +204,7 @@ signed main()
 {
     fast();
 
+
     int n, t;
     cin >> n >> t;
 
@@ -215,13 +233,12 @@ signed main()
         for (int j = 34; j > 0; j--)
         {
             if (done[j]) continue;
-            assert(j != 0);
             PLConvexFunc c = fn[j - 1];
             c.affine_transform(vids[i].first, vids[i].second);
             fn[j] = fn[j].max(c);
             if (fn[j].base_value >= t)
             {
-                repp(k, j + 1, 36) done[k] = 1;
+                repp(k, j, 36) done[k] = 1;
             }
         }
     }

@@ -2,6 +2,8 @@
 
 import sys
 import random
+import math
+from random import randint
 
 def cmdlinearg(name, default=None):
     for arg in sys.argv:
@@ -14,11 +16,14 @@ def cmdlinearg(name, default=None):
 
 random.seed(int(cmdlinearg('seed', sys.argv[-1])))
 n = int(cmdlinearg('n'))
+maxk = int(cmdlinearg('maxk', 1e9))
 
-
-# Generate n lines: each a (scale, shift) pair
-# scale in [0.8, 1.2], shift in [-5, 5]
-for _ in range(n):
-    scale = random.uniform(0.8, 1.2)
-    shift = random.uniform(-5, 5)
-    print(f"{scale:.6f} {shift:.6f}")
+k = randint(1, maxk)
+print(n,k)
+taken = 0
+for i in range(2, n):
+    p = 1
+    while taken < n and p <= k:
+        print(i, randint(1, 100))
+        p *= i
+        taken += 1
