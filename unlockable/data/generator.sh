@@ -44,6 +44,8 @@ tc prime-6 gen_rand N=$MAXN a=19 prime=1 mode=dense
 tc prime-7 gen_rand N=10000 prime=1 MAXA=1000 
 tc prime-8 gen_rand N=$MAXN a=2 prime=1 mode=dense
 tc prime-9 gen_rand N=$MAXN a=2 prime=1 mode=unique
+tc prime-10 gen_rand N=$MAXN a=2969 prime=1 mode=dense
+tc prime-11 gen_rand N=$MAXN a=55109 mode=unique
 
 group group3 45
 include_group group1
