@@ -1,0 +1,48 @@
+\problemname{Encryption}
+\noindent
+Boschua is not very good at cybersecurity. When he heard of the mantra ``don't roll your own cryptography'', he
+ignored the ``don't''.
+
+He has proposed a new encryption scheme based on \texttt{subsequences}. We say that a string $a$ is a subsequence
+of string $b$ if the string $a$ can be obtained by removing $0$ or more characters from $b$, while keeping the
+relative order of characters. For example, \texttt{hej} and \texttt{hejsan} are both subsequences of the word
+\texttt{hejsan}, while \texttt{na} is not. 
+
+His encryption scheme is as follows: to send a string $s$, you need a decoy string, $d$. Then, you will send
+the shortest possible string $k$, where both $s$ and $d$ are subsequences of it. The hope is then that when
+looking at $k$, unwanted parties will only notice the decoy $d$, not $s$. Help realize Boschua's
+terrible encryption scheme by computing $k$, given $s$ and $d$.
+
+For some strange reason, you are also given the shortest string that is a subsequence of both $s$ and $d$.
+If there are multiple such strings, you are given an arbitrary one of them.
+
+\section*{Input}
+The first line of input contains the string $s$, consisting of lowercase letters \texttt{a}-\texttt{z}.
+
+The second line of input contains the string $d$, consisting of lowercase letters \texttt{a}-\texttt{z}.
+
+The third line of input contains the string $d$, consisting of lowercase letters \texttt{a}-\texttt{z}.
+
+\section*{Output}
+Print the shortest string where both $s$ and $d$ appear as subsequences. If there are multiple such strings, any will suffice.
+
+\section*{Scoring}
+Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains
+a set of test cases. To get the points for a test group you need to solve all test cases in the test group.
+
+\noindent
+\begin{tabular}{| l | l | p{12cm} |}
+  \hline
+  \textbf{Group} & \textbf{Points} & \textbf{Constraints} \\ \hline
+  $1$    & $10$       & $|s|,|d| \leq 100$ \\ \hline
+  $2$    & $70$       & $|s|,|d| \leq 10^5$ \\ \hline
+  $3$    & $20$       & $|s|,|d| \leq 10^6$ \\ \hline
+\end{tabular}
+
+\section*{Explanation of Samples}
+In sample $1$, you can reverse the substring ``\texttt{ov}'', resulting in \texttt{lvoable}, which then contains
+``\texttt{lv}''.
+
+In sample $2$, we can replace the ``\texttt{e}'' with a ``\texttt{v}'', which then contains ``\texttt{lv}''.
+
+In sample $3$, the string already contains ``\texttt{lv}''.
