@@ -1,8 +1,9 @@
-#pragma GCC optimize("O3")
-#include <bits/allocator.h>
-#pragma GCC target("avx2")
 #include <bits/stdc++.h>
 using namespace std;
+
+typedef long long ll;
+#define int ll
+const int inf = int(1e18);
 
 typedef vector<int> vi;
 typedef vector<vi> vvi;

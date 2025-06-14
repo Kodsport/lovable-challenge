@@ -26,6 +26,8 @@ mode = cmdlinearg('mode', "random")
 
 if mode == "random":
     a = [random.randint(1,MAXA) for _ in range(N)]
+elif mode == "staircase":
+    a = [i+1 for i in range(N)]
 else:
     assert(0), "mode does not exist"
 
