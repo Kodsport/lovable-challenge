@@ -7,9 +7,9 @@ how releasing each one will affect your following. Each video has two parameters
 and release a video, your amount of followers afterwards will be $a \cdot f + b$. You start with $0$ followers.
 
 To attain your goal as soon as possible, you want to release the smallest number of videos to obtain at least $K$ followers.
-You can release your chosen videos in any order, but you can only release each video idea at most once.
+You can release your chosen videos in any order, but you can only release each video at most once.
 
-Because you are impatient, you might change your mind about $K$. In fact, you have to find the minimum number of videos
+Because you are impatient, you might change your mind about $K$. Therefore, you have to find the minimum number of videos
 for $Q$ different values of $K$.
 
 \section*{Input}
@@ -23,7 +23,7 @@ The final line contains $Q$ integers $K_1, K_2, \dots, K_N$ ($1 \leq K_i \leq 8 
 you want to consider.
 
 \section*{Output}
-For each $K_i$, print the smallest number of videos you need to release to get $K_i$ followers. If it's impossible
+For each $K_i$, print the smallest number of videos you need to release to get at least $K_i$ followers. If it's impossible
 to get $K_i$ followers with the given video ideas, print $-1$ instead.
 Print all of these answers on a single line.
 
@@ -46,11 +46,11 @@ a set of test cases. To get the points for a test group you need to solve all te
 \section*{Explanation of Samples}
 In the first sample, you can obtain at most 9 followers.
 
-In the second sample, for the first question, you can watch both of the $(1,100)$ videos to get 200 followers.
-To get 1006 followers, you can first watch the $(1,100)$ video, then one of the $(2,1)$ videos, and finally the $(5,1)$ video,
+In the second sample, for the first question, you can release both of the $(1,100)$ videos to get 200 followers.
+To get 1006 followers, you can first release the $(1,100)$ video, then one of the $(2,1)$ videos, and finally the $(5,1)$ video,
 netting you $((0 \cdot 1 + 100) \cdot 2 + 1) \cdot 5 + 1= 1006$ followers using 3 videos. You cannot obtain more than $1006$
 followers using 3 videos.
 
-In the third sample, the largest amount of followers possible is by releasing the videos in the order
+In the third sample, the largest amount of followers possible is obtained by releasing the videos in the order
 $(2,20)$, $(3,7)$, $(5,2)$, which gets you $((0 \cdot 2 + 20) \cdot 3 + 7) \cdot 5 + 2=337$ followers.
 No order gets you more followers, so it's impossible to get $338$.

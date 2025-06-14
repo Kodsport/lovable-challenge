@@ -1,10 +1,10 @@
 \problemname{Thirsty Cow}
 
-The water level in the local pond has been changing a lot lately, and there is a thirsty cow by the water that could change that!
+The water level has been changing a lot lately, and there is a thirsty cow by the water that could change that!
 
 You have gotten the information regarding what the water level will be the coming $N$ days. 
 On any given day $i$, the water level will be $a_i$. The cow can drink all water at levels $\geq 0$.
-If you let the thirsty cow drink water any given day, the will greedily drink all $a_i$ water units. 
+If you let the thirsty cow drink water any given day, the cow will greedily drink all $a_i$ water units. 
 By letting the thirsty cow drink, it will also decrease the water level of all days after that by $a_i$ units. 
 The water level may become negative on future days, which means that the cow cannot drink any water on those days.
 
@@ -37,4 +37,12 @@ In sample $1$, the cow could drink drink on the first day. The water levels the 
 $[-5,0]$. This means that it cannot drink any more water. Therefore, it drinks $10$ water units total, which is optimal.
 There are other optimal drinking schedules; drinking on both days $2$ and $3$ works.
 
-In sample $2$, one optimal way of drinking is to drink on days $2$, $4$ and $5$, which results in drinking $10$ units of water.
+In sample $2$, one optimal way of drinking is to drink on days $2$, $4$ and $5$, which results in the cow drinking $10$ units of water. 
+If this schedule is followed, the water levels will be as follows. Note that the levels shown are on all coming days, after the cow has drunk the
+water (if it drinks water on said day).
+\begin{itemize}
+  \item Day $1$: $[3,2,9,10]$
+  \item Day $2$: $[-1,6,7]$
+  \item Day $3$: $[6,7]$
+  \item Day $4$: $[1]$
+\end{itemize}
