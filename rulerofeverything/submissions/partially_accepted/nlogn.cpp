@@ -26,8 +26,8 @@ signed main()
 {
     fast();
 
-    int n, t;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
     vi ones;
 
@@ -48,9 +48,9 @@ signed main()
 
     vvi dp(sz(vids) + 1, vi(40, -1));
 
-    auto tryv = [&](int start)
+    auto tryv = [&](int start, int k)
         {
-            rep(i, sz(vids)+1) rep(j, 39) dp[i][j] = -1;
+            rep(i, sz(vids) + 1) rep(j, 39) dp[i][j] = -1;
             dp[0][0] = start;
 
             rep(i, sz(vids))
@@ -59,9 +59,9 @@ signed main()
                 {
                     if (dp[i][j] == -1) continue;
                     dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
-                    dp[i + 1][j] = min(dp[i + 1][j], t + 1);
+                    dp[i + 1][j] = min(dp[i + 1][j], k + 1);
                     dp[i + 1][j + 1] = max(dp[i + 1][j + 1], dp[i][j] * vids[i].first + vids[i].second);
-                    dp[i + 1][j + 1] = min(dp[i + 1][j + 1], t + 1);
+                    dp[i + 1][j + 1] = min(dp[i + 1][j + 1], k + 1);
                 }
             }
             int ret = inf;
@@ -70,7 +70,7 @@ signed main()
                 rep(j, 40)
                 {
                     if (dp[i][j] == -1) continue;
-                    if (dp[i][j] >= t)
+                    if (dp[i][j] >= k)
                     {
                         ret = min(ret, j);
                     }
@@ -80,40 +80,48 @@ signed main()
         };
 
 
-    auto getvpref = [&](int ind)
+    auto getvpref = [&](int ind, int k)
         {
             int s = 0;
             rep(i, ind) s += ones[i];
-            return tryv(s);
+            return tryv(s, k);
         };
 
-    int lo = -1;
-    int hi = sz(ones) + 1;
-    while (lo+1<hi)
+    while (q--)
     {
-        int mid = (lo + hi) / 2;
-        if (getvpref(mid) != inf)
+        int k;
+        cin >> k;
+        int lo = -1;
+        int hi = sz(ones) + 1;
+        while (lo + 1 < hi)
         {
-            hi = mid;
+            int mid = (lo + hi) / 2;
+            if (getvpref(mid, k) != inf)
+            {
+                hi = mid;
+            }
+            else lo = mid;
         }
-        else lo = mid;
-    }
 
-    if (hi==sz(ones) + 1)
-    {
-        cout << "-1\n";
-        return 0;
-    }
-    else
-    {
-        int ans = hi + getvpref(hi);
-        repp(i, hi + 1, sz(ones)+1)
+        if (hi == sz(ones) + 1)
         {
-            if (i >= ans) break;
-            ans = min(ans, i+getvpref(i));
+            cout << "-1 ";
+            continue;
         }
-        cout << ans << "\n";
+        else
+        {
+            int ans = hi + getvpref(hi, k);
+            repp(i, hi + 1, sz(ones) + 1)
+            {
+                if (i >= ans) break;
+                ans = min(ans, i + getvpref(i, k));
+            }
+            cout << ans << " ";
+        }
     }
+    cout << "\n";
+
+    
 
     return 0;
 }

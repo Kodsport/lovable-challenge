@@ -48,8 +48,8 @@ signed main()
 {
     fast();
 
-    int n;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
     vi ones;
 
@@ -64,31 +64,34 @@ signed main()
     sort(all(ones));
     reverse(all(ones));
 
-    int ans = inf;
+    while (q--)
+    {
+        cin >> t;
+        int ans = inf;
 
-    auto cost = [&](int start)
+        auto cost = [&](int start)
+            {
+                best = inf;
+                vi used(sz(vids));
+
+                rec(0, start, used, vids);
+                return best;
+            };
+
+        ans = min(ans, cost(0));
+        int p = 0;
+        rep(i, sz(ones))
         {
-            best = inf;
-            vi used(sz(vids));
+            p += ones[i];
+            if (i + 1 >= ans) continue;
+            ans = min(ans, i + 1 + cost(p));
+        }
 
-            rec(0, start, used, vids);
-            return best;
-        };
-
-    ans = min(ans, cost(0));
-    int p = 0;
-    rep(i, sz(ones))
-    {
-        p += ones[i];
-        if (i + 1 >= ans) continue;
-        ans = min(ans, i + 1 + cost(p));
+        if (ans == inf) ans = -1;
+        cout << ans << " ";
     }
-
-    if (ans == inf)
-    {
-        cout << "-1";
-    }
-    else cout << ans;
+    cout << '\n';
+    
 
     return 0;
 }

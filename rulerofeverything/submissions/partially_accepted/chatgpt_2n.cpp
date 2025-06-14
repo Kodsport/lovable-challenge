@@ -7,9 +7,8 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int n;
-    ll t;
-    cin >> n >> t;
+    int n, queries;
+    cin >> n >> queries;
     vector<pair<ll, ll>> vids(n);
     for (int i = 0; i < n; i++) {
         cin >> vids[i].first >> vids[i].second;
@@ -45,48 +44,58 @@ int main() {
         multiplier[i] = multiplier[i - 1] * base[i - 1];
     }
 
-    // For each state-id, store best "subs" achieved
-    vector<ll> bestSubs(states, NEG_INF);
+    while (queries--)
+    {
+        ll t;
+        cin >> t;
 
-    // BFS over number of picks (taken)
-    deque<long long> q;
-    // state encoded counts all zero => id 0
-    bestSubs[0] = 0;
-    q.push_back(0);
-    int taken = 0;
 
-    // sentinel for level separation
-    q.push_back(-1);
-    while (!q.empty()) {
-        ll sid = q.front(); q.pop_front();
-        if (sid == -1) {
-            taken++;
-            if (q.empty()) break;
-            q.push_back(-1);
-            continue;
-        }
-        ll currentSubs = bestSubs[sid];
-        // try any group pick
-        for (int i = 0; i < G; i++) {
-            // decode count at group i
-            int cnt = (sid / multiplier[i]) % base[i];
-            if (cnt + 1 >= base[i]) continue;  // already exhausted
-            // new state id
-            ll nid = sid + multiplier[i];
-            // compute new subs
-            ll b = B[i][cnt];
-            ll nsubs = currentSubs * A[i] + b;
-            if (nsubs > bestSubs[nid]) {
-                if (nsubs >= t) {
-                    cout << taken+1 << "\n";
-                    return 0;
+        // For each state-id, store best "subs" achieved
+        vector<ll> bestSubs(states, NEG_INF);
+
+        // BFS over number of picks (taken)
+        deque<long long> q;
+        // state encoded counts all zero => id 0
+        bestSubs[0] = 0;
+        q.push_back(0);
+        int taken = 0;
+
+        int ans = -1;
+        // sentinel for level separation
+        q.push_back(-1);
+        while (!q.empty()) {
+            ll sid = q.front(); q.pop_front();
+            if (sid == -1) {
+                taken++;
+                if (q.empty()) break;
+                q.push_back(-1);
+                continue;
+            }
+            ll currentSubs = bestSubs[sid];
+            // try any group pick
+            for (int i = 0; i < G; i++) {
+                // decode count at group i
+                int cnt = (sid / multiplier[i]) % base[i];
+                if (cnt + 1 >= base[i]) continue;  // already exhausted
+                // new state id
+                ll nid = sid + multiplier[i];
+                // compute new subs
+                ll b = B[i][cnt];
+                ll nsubs = currentSubs * A[i] + b;
+                if (nsubs > bestSubs[nid]) {
+                    if (nsubs >= t) {
+                        ans = taken + 1;
+                        goto done;
+                    }
+                    bestSubs[nid] = nsubs;
+                    q.push_back(nid);
                 }
-                bestSubs[nid] = nsubs;
-                q.push_back(nid);
             }
         }
+    done:;
+        cout << ans << ' ';
     }
+    cout << '\n';
 
-    cout << -1 << '\n';
     return 0;
 }

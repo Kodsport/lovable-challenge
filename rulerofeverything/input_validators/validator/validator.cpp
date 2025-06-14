@@ -14,7 +14,7 @@ typedef vector<int> vi;
 void run() {
     int n = Int(1, Arg("maxn"));
     Space();
-    ll k = Int(1, ll(8e9));
+    int q = Int(1, Arg("maxq"));
     Endl();
 
     for (int i = 0; i < n; ++i) {
@@ -23,7 +23,5 @@ void run() {
         Int(1, ll(1e5));
         Endl();
     }
-
-    Eof();
+    SpacedInts(q, 1LL, ll(8e9));
 }
-

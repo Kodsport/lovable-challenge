@@ -26,34 +26,39 @@ signed main()
 {
     fast();
 
-    int n, t;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
     vector<p2> vids(n);
     repe(v, vids) cin >> v.first >> v.second;
     sort(all(vids));
 
-    int ans = inf;
-
-    do
+    while (q--)
     {
-        int subs = 0;
-        rep(i, n)
+        int t;
+        cin >> t;
+
+        int ans = inf;
+
+        do
         {
-            subs = vids[i].first * subs + vids[i].second;
-            if (subs>=t)
+            int subs = 0;
+            rep(i, n)
             {
-                ans = min(ans, i + 1);
-                break;
+                subs = vids[i].first * subs + vids[i].second;
+                if (subs >= t)
+                {
+                    ans = min(ans, i + 1);
+                    break;
+                }
             }
-        }
-    } while (next_permutation(all(vids)));
+        } while (next_permutation(all(vids)));
 
-    if (ans == inf)
-    {
-        cout << "-1";
+        if (ans == inf) ans = -1;
+        cout << ans << " ";
     }
-    else cout << ans;
+    cout << '\n';
+
 
     return 0;
 }

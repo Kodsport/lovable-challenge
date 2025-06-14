@@ -224,6 +224,7 @@ public:
 
 };
 
+const int maxt = int(8e9) + 10;
 signed main()
 {
     fast();
@@ -233,8 +234,8 @@ signed main()
     cin.rdbuf(in.rdbuf());
 #endif
 
-    int n, t;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
     vi ones;
 
@@ -257,11 +258,11 @@ signed main()
 
     double tot_cost = 0;
     double max_vids = 0;
-    vector<PLConvexFunc> fn(36);
-    vi done(36);
+    vector<PLConvexFunc> fn(38);
+    vi done(38);
     rep(i, sz(vids))
     {
-        for (int j = 34; j > 0; j--)
+        for (int j = 36; j > 0; j--)
         {
             //assert(!(j == 1 && i==2));
             //assert(!(j == 1 && i==1));
@@ -271,37 +272,76 @@ signed main()
             fn[j].max(c);
             tot_cost += fn[j].breakpoints.size();
             max_vids = max(max_vids, (double)fn[j].breakpoints.size());
-            if (fn[j].base_value >= t)
+            if (fn[j].base_value >= maxt)
             {
-                repp(k, j, 36) done[k] = 1;
+                repp(k, j, 38) done[k] = 1;
             }
         }
     }
 
 
-    int ans = inf;
-    int p = 0;
+    vi pref(ones);
+    repp(i, 1, sz(pref)) pref[i] += pref[i - 1];
+    pref.insert(begin(pref), 0);
 
-    auto min_nonone = [&](int p)
+    stringstream out;
+    vvi cache(38, vi(sz(ones)+1, -1));
+    while (q--)
+    {
+        int k;
+        cin >> k;
+
+        int ans = inf;
+        int p = 0;
+
+        auto eval_at = [&](int j, int p)
         {
-            rep(j, sz(fn))
-            {
-                if (fn[j].evaluate_at(p) >= t)
-                {
-                    return j;
-                }
-            }
-            return inf;
+            if (cache[j][p]!=-1) return cache[j][p];
+            return cache[j][p] = fn[j].evaluate_at(pref[p]);
         };
 
-    rep(i, sz(ones))
-    {
-        ans = min(ans, i + min_nonone(p));
-        p += ones[i];
+        auto min_nonone = [&](int p)
+            {
+                rep(j, sz(fn))
+                {
+                    if (eval_at(j, p) >= k)
+                    {
+                        return j;
+                    }
+                }
+                return inf;
+            };
+
+        int lo = -1;
+        int hi = sz(ones) + 1;
+        while (lo + 1 < hi)
+        {
+            int mid = (lo + hi) / 2;
+            if (min_nonone(mid) != inf)
+            {
+                hi = mid;
+            }
+            else lo = mid;
+        }
+
+        if (hi == sz(ones) + 1)
+        {
+            out << "-1 ";
+        }
+        else
+        {
+            int ans = hi + min_nonone(hi);
+            repp(i, hi + 1, sz(ones) + 1)
+            {
+                if (i >= ans) break;
+                ans = min(ans, i + min_nonone(i));
+            }
+            out << ans << " ";
+        }
     }
-    ans = min(ans, sz(ones) + min_nonone(p));
-    if (ans == inf) ans = -1;
-    cout << ans << "\n";
+    cout << out.str();
+    cout << "\n";
+
 
     cerr << (sz(vids) ? tot_cost / sz(vids) : 0) << " " << max_vids;
     // int tot_bp = 0;

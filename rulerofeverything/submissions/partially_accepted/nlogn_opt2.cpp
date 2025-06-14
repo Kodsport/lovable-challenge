@@ -1,3 +1,6 @@
+#pragma GCC optimize("O3")
+#include <bits/allocator.h>
+#pragma GCC target("avx2")
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -17,17 +20,12 @@ typedef pair<int, int> p2;
 
 inline void fast() { cin.tie(0)->sync_with_stdio(0); }
 
-#if _LOCAL
-#define assert(x) if (!(x)) __debugbreak()
-#endif
-
-const int maxt = int(1e9)+10;
 signed main()
 {
     fast();
 
-    int n, t;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
     vi ones;
 
@@ -48,64 +46,70 @@ signed main()
 
     vi dp(40, -1);
 
-    auto tryv = [&](int start)
+    auto tryv = [&](int start, int k)
         {
-            rep(j, 40) dp[j] = -1;
+            rep(j, 40) dp[j] = 0;
             dp[0] = start;
 
-            rep(i,sz(vids))
+            rep(i, sz(vids))
             {
                 for (int j = 39; j > 0; j--)
                 {
-                    if (dp[j-1] == -1) continue;
-                    dp[j] = max(dp[j], dp[j-1] * vids[i].first + vids[i].second);
-                    dp[j] = min(dp[j], t + 1);
+                    dp[j] = max(dp[j], dp[j - 1] * vids[i].first + vids[i].second);
                 }
+                rep(j, 39) dp[j] = min(dp[j], k + 1);
             }
 
             rep(i, 40)
             {
-                if (dp[i] >= t) return i;
+                if (dp[i] >= k) return i;
             }
-            
+
             return inf;
         };
 
 
-    auto getvpref = [&](int ind)
+    auto getvpref = [&](int ind, int k)
         {
             int s = 0;
             rep(i, ind) s += ones[i];
-            return tryv(s);
+            return tryv(s, k);
         };
 
-    int lo = -1;
-    int hi = sz(ones) + 1;
-    while (lo + 1 < hi)
+    while (q--)
     {
-        int mid = (lo + hi) / 2;
-        if (getvpref(mid) != inf)
-        {
-            hi = mid;
-        }
-        else lo = mid;
-    }
+        int k;
+        cin >> k;
 
-    if (hi == sz(ones) + 1)
-    {
-        cout << "-1\n";
-        return 0;
-    }
-    else
-    {
-        int ans = hi + getvpref(hi);
-        repp(i, hi + 1, sz(ones) + 1)
+        int lo = -1;
+        int hi = sz(ones) + 1;
+        while (lo + 1 < hi)
         {
-            if (i >= ans) break;
-            ans = min(ans, i + getvpref(i));
+            int mid = (lo + hi) / 2;
+            if (getvpref(mid, k) != inf)
+            {
+                hi = mid;
+            }
+            else lo = mid;
         }
-        cout << ans << "\n";
+
+        if (hi == sz(ones) + 1)
+        {
+            cout << "-1 ";
+            continue;
+        }
+        else
+        {
+            int ans = hi + getvpref(hi, k);
+            repp(i, hi + 1, sz(ones) + 1)
+            {
+                if (i >= ans) break;
+                ans = min(ans, i + getvpref(i, k));
+            }
+            cout << ans << " ";
+        }
     }
+    cout << "\n";
 
     return 0;
 }

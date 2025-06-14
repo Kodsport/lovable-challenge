@@ -16,14 +16,15 @@ def cmdlinearg(name, default=None):
 
 random.seed(int(cmdlinearg('seed', sys.argv[-1])))
 n = int(cmdlinearg('n'))
+q = int(cmdlinearg('q', 5))
 maxk = int(cmdlinearg('maxk', 1e9))
 
-k = randint(1, maxk)
-print(n,k)
+print(n,q)
 taken = 0
 for i in range(2, n):
     p = 1
-    while taken < n and p <= k:
+    while taken < n and p <= maxk:
         print(i, randint(1, 100))
         p *= i
         taken += 1
+print(*(randint(1, maxk) for i in range(q)))

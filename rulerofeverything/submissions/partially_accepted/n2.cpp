@@ -27,18 +27,17 @@ signed main()
 {
     fast();
 
-    int n, t;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
     vector<p2> vids(n);
     repe(v, vids) cin >> v.first >> v.second;
     sort(all(vids), [](p2 a, p2 b)
         {
-            return (a.second*b.first)+b.second > (b.second*a.first)+a.second;
+            return (a.second * b.first) + b.second > (b.second * a.first) + a.second;
         });
 
-    int ans = inf;
-
+    
     vvi dp(n + 1, vi(n + 1, -1));
     dp[0][0] = 0;
 
@@ -48,28 +47,30 @@ signed main()
         {
             if (dp[i][j] == -1) continue;
             dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
-            dp[i + 1][j] = min(dp[i + 1][j], t + 1);
+            dp[i + 1][j] = min(dp[i + 1][j], ll(8e9)+10);
             dp[i + 1][j + 1] = max(dp[i + 1][j + 1], dp[i][j] * vids[i].first + vids[i].second);
-            dp[i + 1][j + 1] = min(dp[i + 1][j + 1], t + 1);
+            dp[i + 1][j + 1] = min(dp[i + 1][j + 1], ll(8e9)+10);
         }
     }
-    rep(i, n+1)
+
+    while (q--)
     {
-        rep(j, n+1)
+        int t;
+        cin >> t;
+        int ans = inf;
+
+        rep(j, n + 1)
         {
-            if (dp[i][j] == -1) continue;
-            if (dp[i][j] >= t)
+            if (dp.back()[j] >= t)
             {
                 ans = min(ans, j);
             }
         }
-    }
 
-    if (ans == inf)
-    {
-        cout << "-1";
+        if (ans == inf) ans = -1;
+        cout << ans << ' ';
     }
-    else cout << ans;
-
+    cout << '\n';
+   
     return 0;
 }

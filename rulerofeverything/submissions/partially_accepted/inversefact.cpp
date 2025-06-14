@@ -47,8 +47,8 @@ signed main()
 {
     fast();
 
-    int n;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
     vi ones;
 
@@ -76,7 +76,6 @@ signed main()
         reverse(all(g.second));
     }
 
-    int ans = inf;
     auto tryv = [&](int start)
         {
             best = inf;
@@ -84,20 +83,24 @@ signed main()
             return best;
         };
 
-    ans = min(ans, tryv(0));
-    int s = 0;
-    rep(numtake, sz(ones))
+    while (q--)
     {
-        s += ones[numtake];
-        ans = min(ans, numtake + 1 + tryv(s));
-    }
+        cin >> t;
+        int ans = inf;
+
+        ans = min(ans, tryv(0));
+        int s = 0;
+        rep(numtake, sz(ones))
+        {
+            s += ones[numtake];
+            ans = min(ans, numtake + 1 + tryv(s));
+        }
 
 
-    if (ans == inf)
-    {
-        cout << "-1";
+        if (ans == inf) ans = -1;
+        cout << ans << " ";
     }
-    else cout << ans;
+    cout << '\n';
 
     return 0;
 }

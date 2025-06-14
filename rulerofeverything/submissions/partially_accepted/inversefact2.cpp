@@ -47,8 +47,8 @@ signed main()
 {
     fast();
 
-    int n;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
 
     vector<p2> vids;
@@ -78,13 +78,17 @@ signed main()
             rec(0, start, groupind, groups);
             return best;
         };
-    int ans = tryv(0);
 
-    if (ans == inf)
+    while (q--)
     {
-        cout << "-1";
+        cin >> t;
+
+        int ans = tryv(0);
+
+        if (ans == inf) ans = -1;
+        cout << ans << " ";
     }
-    else cout << ans;
+    cout << '\n';
 
     return 0;
 }

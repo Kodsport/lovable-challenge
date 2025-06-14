@@ -228,8 +228,8 @@ signed main()
 {
     fast();
 
-    int n, t;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
     vi ones;
 
@@ -250,10 +250,10 @@ signed main()
 
     double tot_cost = 0;
     double max_vids = 0;
-    vector<PLConvexFunc> fn(36);
+    vector<PLConvexFunc> fn(38);
     rep(i, sz(vids))
     {
-        for (int j = 34; j > 0; j--)
+        for (int j = 36; j > 0; j--)
         {
             //assert(!(j == 1 && i==2));
             //assert(!(j == 1 && i==1));
@@ -265,30 +265,35 @@ signed main()
         }
     }
 
-
-    int ans = inf;
-    int p = 0;
-
-    auto min_nonone = [&](int p)
-        {
-            rep(j, sz(fn))
-            {
-                if (fn[j].evaluate_at(p) >= t)
-                {
-                    return j;
-                }
-            }
-            return inf;
-        };
-
-    rep(i, sz(ones))
+    while (q--)
     {
-        ans = min(ans, i + min_nonone(p));
-        p += ones[i];
+        int t;
+        cin >> t;
+        int ans = inf;
+        int p = 0;
+
+        auto min_nonone = [&](int p)
+            {
+                rep(j, sz(fn))
+                {
+                    if (fn[j].evaluate_at(p) >= t)
+                    {
+                        return j;
+                    }
+                }
+                return inf;
+            };
+
+        rep(i, sz(ones))
+        {
+            ans = min(ans, i + min_nonone(p));
+            p += ones[i];
+        }
+        ans = min(ans, sz(ones) + min_nonone(p));
+        if (ans == inf) ans = -1;
+        cout << ans << " ";
     }
-    ans = min(ans, sz(ones) + min_nonone(p));
-    if (ans == inf) ans = -1;
-    cout << ans << "\n";
+    
 
     //cout << (sz(vids) ? tot_cost / sz(vids) : 0) << " " << max_vids;
     // int tot_bp = 0;

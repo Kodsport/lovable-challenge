@@ -16,9 +16,10 @@ def cmdlinearg(name, default=None):
 
 random.seed(int(cmdlinearg('seed', sys.argv[-1])))
 n = int(cmdlinearg('n'))
+q = int(cmdlinearg('q', 5))
 maxk = int(cmdlinearg('maxk', 1e9))
 
-k = randint(1, maxk)
-print(n,k)
+print(n,q)
 for i in range(n):
     print(randint(1, 5),randint(1, 100))
+print(*(randint(1, maxk) for i in range(q)))

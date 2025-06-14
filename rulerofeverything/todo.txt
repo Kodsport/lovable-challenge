@@ -1,4 +1,0 @@
-rulerofeverything:
-testcases with opt or opt+1
-kill all slope tricks...
-queries

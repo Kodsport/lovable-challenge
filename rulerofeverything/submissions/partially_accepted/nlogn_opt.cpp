@@ -21,7 +21,6 @@ inline void fast() { cin.tie(0)->sync_with_stdio(0); }
 #define assert(x) if (!(x)) __debugbreak()
 #endif
 
-
 signed main()
 {
     fast();
@@ -46,37 +45,29 @@ signed main()
             return (a.second) * (b.first - 1) > b.second * (a.first - 1);
         });
 
-    vvi dp(sz(vids) + 1, vi(40, -1));
+    vi dp(40, -1);
 
     auto tryv = [&](int start, int k)
         {
-            rep(i, sz(vids) + 1) rep(j, 39) dp[i][j] = -1;
-            dp[0][0] = start;
+            rep(j, 40) dp[j] = -1;
+            dp[0] = start;
 
             rep(i, sz(vids))
             {
-                rep(j, 39)
+                for (int j = 39; j > 0; j--)
                 {
-                    if (dp[i][j] == -1) continue;
-                    dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
-                    dp[i + 1][j] = min(dp[i + 1][j], k + 1);
-                    dp[i + 1][j + 1] = max(dp[i + 1][j + 1], dp[i][j] * vids[i].first + vids[i].second);
-                    dp[i + 1][j + 1] = min(dp[i + 1][j + 1], k + 1);
+                    if (dp[j - 1] == -1) continue;
+                    dp[j] = max(dp[j], dp[j - 1] * vids[i].first + vids[i].second);
+                    dp[j] = min(dp[j], k + 1);
                 }
             }
-            int ret = inf;
-            rep(i, sz(vids) + 1)
+
+            rep(i, 40)
             {
-                rep(j, 40)
-                {
-                    if (dp[i][j] == -1) continue;
-                    if (dp[i][j] >= k)
-                    {
-                        ret = min(ret, j);
-                    }
-                }
+                if (dp[i] >= k) return i;
             }
-            return ret;
+
+            return inf;
         };
 
 
@@ -91,14 +82,36 @@ signed main()
     {
         int k;
         cin >> k;
-        int ans = inf;
-        rep(i, sz(ones) + 1) ans = min(ans, i + getvpref(i, k));
 
-        if (ans >= inf) ans = -1;
-        cout << ans << " ";
+        int lo = -1;
+        int hi = sz(ones) + 1;
+        while (lo + 1 < hi)
+        {
+            int mid = (lo + hi) / 2;
+            if (getvpref(mid, k) != inf)
+            {
+                hi = mid;
+            }
+            else lo = mid;
+        }
+
+        if (hi == sz(ones) + 1)
+        {
+            cout << "-1 ";
+            continue;
+        }
+        else
+        {
+            int ans = hi + getvpref(hi, k);
+            repp(i, hi + 1, sz(ones) + 1)
+            {
+                if (i >= ans) break;
+                ans = min(ans, i + getvpref(i, k));
+            }
+            cout << ans << " ";
+        }
     }
-    cout << '\n';
-    
+    cout << "\n";
 
     return 0;
 }

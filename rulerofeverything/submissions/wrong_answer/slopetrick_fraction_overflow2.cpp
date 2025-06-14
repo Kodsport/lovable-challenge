@@ -187,8 +187,8 @@ signed main()
 {
     fast();
 
-    int n, t;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
 
     vi ones;
@@ -208,47 +208,54 @@ signed main()
             return (a.second) * (b.first - 1) > b.second * (a.first - 1);
         });
 
-    vector<PLConvexFunc> fn(36);
-    vi done(36);
+    vector<PLConvexFunc> fn(38);
+    vi done(38);
     rep(i, sz(vids))
     {
-        for (int j = 34; j > 0; j--)
+        for (int j = 36; j > 0; j--)
         {
             if (done[j]) continue;
             assert(j != 0);
             PLConvexFunc c = fn[j - 1];
             c.affine_transform(vids[i].first, vids[i].second);
             fn[j] = fn[j].max(c);
-            if (fn[j].base_value >= t)
+            if (fn[j].base_value >= int(8e9)+10)
             {
                 repp(k, j, 36) done[k] = 1;
             }
         }
     }
 
-    int ans = inf;
-    int p = 0;
-
-    auto min_nonone = [&](int p)
-        {
-            rep(j, sz(fn))
-            {
-                if (fn[j].evaluate_at(p) >= t)
-                {
-                    return j;
-                }
-            }
-            return inf;
-        };
-
-    rep(i, sz(ones))
+    while (q--)
     {
-        ans = min(ans, i + min_nonone(p));
-        p += ones[i];
+        int k;
+        cin >> k;
+
+        int ans = inf;
+        int p = 0;
+
+        auto min_nonone = [&](int p)
+            {
+                rep(j, sz(fn))
+                {
+                    if (fn[j].evaluate_at(p) >= k)
+                    {
+                        return j;
+                    }
+                }
+                return inf;
+            };
+
+        rep(i, sz(ones))
+        {
+            ans = min(ans, i + min_nonone(p));
+            p += ones[i];
+        }
+        ans = min(ans, sz(ones) + min_nonone(p));
+        if (ans == inf) ans = -1;
+        cout << ans << " ";
     }
-    ans = min(ans, sz(ones) + min_nonone(p));
-    if (ans == inf) ans = -1;
-    cout << ans << "\n";
+
     //rep(i, 36)
     //{
     //    cout << fn[i].breakpoints.size() << "\n";

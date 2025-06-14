@@ -210,8 +210,8 @@ signed main()
 {
     fast();
 
-    int n, t;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
 
     vi ones;
@@ -231,10 +231,10 @@ signed main()
             return (a.second) * (b.first - 1) > b.second * (a.first - 1);
         });
 
-    vector<PLConvexFunc> fn(36);
+    vector<PLConvexFunc> fn(38);
     rep(i, sz(vids))
     {
-        for (int j = 34; j > 0; j--)
+        for (int j = 36; j > 0; j--)
         {
             assert(j != 0);
             PLConvexFunc c = fn[j - 1];
@@ -243,30 +243,35 @@ signed main()
         }
     }
 
-
-    int ans = inf;
-    int p = 0;
-
-    auto min_nonone = [&](int p)
-        {
-            rep(j, sz(fn))
-            {
-                if (fn[j].evaluate_at(p) >= t)
-                {
-                    return j;
-                }
-            }
-            return inf;
-        };
-
-    rep(i, sz(ones))
+    while (q--)
     {
-        ans = min(ans, i + min_nonone(p));
-        p += ones[i];
+        int k;
+        cin >> k;
+        int ans = inf;
+        int p = 0;
+
+        auto min_nonone = [&](int p)
+            {
+                rep(j, sz(fn))
+                {
+                    if (fn[j].evaluate_at(p) >= k)
+                    {
+                        return j;
+                    }
+                }
+                return inf;
+            };
+
+        rep(i, sz(ones))
+        {
+            ans = min(ans, i + min_nonone(p));
+            p += ones[i];
+        }
+        ans = min(ans, sz(ones) + min_nonone(p));
+        if (ans == inf) ans = -1;
+        cout << ans << " ";
     }
-    ans = min(ans, sz(ones) + min_nonone(p));
-    if (ans == inf) ans = -1;
-    cout << ans << "\n";
+    
 
     // int tot_bp = 0;
     // rep(i, 36) tot_bp += sz(fn[i].breakpoints);

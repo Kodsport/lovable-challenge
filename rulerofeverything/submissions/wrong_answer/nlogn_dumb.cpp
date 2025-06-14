@@ -27,8 +27,8 @@ signed main()
 {
     fast();
 
-    int n, t;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
     vi ones;
 
@@ -47,67 +47,73 @@ signed main()
             return (a.second) * (b.first - 1) > b.second * (a.first - 1);
         });
 
-    int ans = inf;
+    while (q--)
+    {
+        int k;
+        cin >> k;
 
-    auto tryv = [&](int start)
-        {
+        int ans = inf;
 
-            vvi dp(sz(vids) + 1, vi(40, -1));
-            dp[0][0] = start;
-
-            rep(i, sz(vids))
+        auto tryv = [&](int start)
             {
-                rep(j, 39)
-                {
-                    if (dp[i][j] == -1) continue;
-                    dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
-                    dp[i + 1][j] = min(dp[i + 1][j], t + 1);
-                    dp[i + 1][j + 1] = max(dp[i + 1][j + 1], dp[i][j] * vids[i].first + vids[i].second);
-                    dp[i + 1][j + 1] = min(dp[i + 1][j + 1], t + 1);
 
-                }
-            }
-            int ret = inf;
-            rep(i, sz(vids) + 1)
-            {
-                rep(j, 40)
+                vvi dp(sz(vids) + 1, vi(40, -1));
+                dp[0][0] = start;
+
+                rep(i, sz(vids))
                 {
-                    if (dp[i][j] == -1) continue;
-                    if (dp[i][j] >= t)
+                    rep(j, 39)
                     {
-                        ret = min(ret, j);
+                        if (dp[i][j] == -1) continue;
+                        dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
+                        dp[i + 1][j] = min(dp[i + 1][j], k + 1);
+                        dp[i + 1][j + 1] = max(dp[i + 1][j + 1], dp[i][j] * vids[i].first + vids[i].second);
+                        dp[i + 1][j + 1] = min(dp[i + 1][j + 1], k + 1);
+
                     }
                 }
-            }
-            return ret;
-        };
+                int ret = inf;
+                rep(i, sz(vids) + 1)
+                {
+                    rep(j, 40)
+                    {
+                        if (dp[i][j] == -1) continue;
+                        if (dp[i][j] >= k)
+                        {
+                            ret = min(ret, j);
+                        }
+                    }
+                }
+                return ret;
+            };
 
 
-    int lo = -1;
-    int hi = sz(ones) + 1;
-    while (lo+1<hi)
-    {
-        int mid = (lo + hi) / 2;
-        int s = 0;
-        rep(i, mid) s += ones[i];
-        if (tryv(s) != inf)
+        int lo = -1;
+        int hi = sz(ones) + 1;
+        while (lo + 1 < hi)
         {
-            hi = mid;
+            int mid = (lo + hi) / 2;
+            int s = 0;
+            rep(i, mid) s += ones[i];
+            if (tryv(s) != inf)
+            {
+                hi = mid;
+            }
+            else lo = mid;
         }
-        else lo = mid;
+
+        if (hi == sz(ones) + 1)
+        {
+            cout << "-1 ";
+        }
+        else
+        {
+            int s = 0;
+            rep(i, hi) s += ones[i];
+            cout << hi + tryv(s) << " ";
+        }
     }
 
-    if (hi==sz(ones) + 1)
-    {
-        cout << "-1";
-        return 0;
-    }
-    else
-    {
-        int s = 0;
-        rep(i, hi) s += ones[i];
-        cout << hi + tryv(s);
-    }
 
     return 0;
 }

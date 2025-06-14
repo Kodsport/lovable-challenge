@@ -28,8 +28,8 @@ signed main()
 {
     fast();
 
-    int n, t;
-    cin >> n >> t;
+    int n, q;
+    cin >> n >> q;
 
     vi ones;
 
@@ -48,54 +48,57 @@ signed main()
             return (a.second) * (b.first - 1) > b.second * (a.first - 1);
         });
 
-    int ans = inf;
-
-    vvi dp(sz(vids) + 1, vi(40, -1));
-    dp[0][0] = 0;
-
-    rep(i, sz(vids))
+    while (q--)
     {
-        rep(j, 38)
+        int k;
+        cin >> k;
+        int ans = inf;
+
+        vvi dp(sz(vids) + 1, vi(40, -1));
+        dp[0][0] = 0;
+
+        rep(i, sz(vids))
         {
-            if (dp[i][j] == -1) continue;
-            if (dp[i][j] >= t)
+            rep(j, 38)
             {
-                ans = min(ans, j);
-            }
-            dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
-            dp[i + 1][j] = min(dp[i + 1][j], t + 1);
-            dp[i + 1][j + 1] = max(dp[i + 1][j + 1], dp[i][j] * vids[i].first + vids[i].second);
-            dp[i + 1][j + 1] = min(dp[i + 1][j + 1], t+1);
-            
-        }
-    }
-    
-    vi bestat(40);
-    rep(i, sz(vids)+1)rep(j, 40) bestat[j] = max(bestat[j], dp[i][j]);
-    rep(i, 40)
-    {
-        if (bestat[i]>=t)
-        {
-            ans = min(ans, i);
-            continue;
-        }
-        int s = 0;
-        rep(j, sz(ones))
-        {
-            s += ones[j];
-            if (bestat[i]+s>=t)
-            {
-                ans = min(ans, j + 1 + i);
-                break;
+                if (dp[i][j] == -1) continue;
+                if (dp[i][j] >= k)
+                {
+                    ans = min(ans, j);
+                }
+                dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
+                dp[i + 1][j] = min(dp[i + 1][j], k + 1);
+                dp[i + 1][j + 1] = max(dp[i + 1][j + 1], dp[i][j] * vids[i].first + vids[i].second);
+                dp[i + 1][j + 1] = min(dp[i + 1][j + 1], k + 1);
+
             }
         }
+
+        vi bestat(40);
+        rep(i, sz(vids) + 1)rep(j, 40) bestat[j] = max(bestat[j], dp[i][j]);
+        rep(i, 40)
+        {
+            if (bestat[i] >= k)
+            {
+                ans = min(ans, i);
+                continue;
+            }
+            int s = 0;
+            rep(j, sz(ones))
+            {
+                s += ones[j];
+                if (bestat[i] + s >= k)
+                {
+                    ans = min(ans, j + 1 + i);
+                    break;
+                }
+            }
+        }
+
+        if (ans == inf) ans = -1;
+        cout << ans << " ";
     }
 
-    if (ans == inf)
-    {
-        cout << "-1";
-    }
-    else cout << ans;
 
     return 0;
 }
