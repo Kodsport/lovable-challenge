@@ -1,15 +1,15 @@
 \problemname{Thirsty Cow}
 
-The water level has been changing a lot lately, and there is a thirsty cow by the water that could change that!
+The water level has been changing a lot lately, but there is a thirsty cow by the water that could change that!
 
-You have gotten the information regarding what the water level will be the coming $N$ days. 
-On any given day $i$, the water level will be $a_i$. The cow can drink all water at levels $\geq 0$.
+You have received information regarding what the water level will be the coming $N$ days. 
+On any given day $i$, the water level will be $a_i$. The cow can drink all water on a day if the water level is at least zero.
 If you let the thirsty cow drink water any given day, the cow will greedily drink all $a_i$ water units. 
 By letting the thirsty cow drink, it will also decrease the water level of all days after that by $a_i$ units. 
 The water level may become negative on future days, which means that the cow cannot drink any water on those days.
 
-Since the thirsty cow is extremely thirsty, the cow wants to drink as much water as possble in total over all $N$ days.
-Could you help the thirsy cow figure out how much it could drink if it decides when to drink optimally?
+Since the thirsty cow is extremely thirsty, the cow wants to drink as much water as possible in total over all $N$ days.
+Could you help the thirsty cow figure out how much it could drink if it decides when to drink optimally?
 
 \section*{Input}
 The first line contains an integer $N$ ($1 \leq N \leq 3 \cdot 10^5$), the number of days as described above.
@@ -17,7 +17,7 @@ The first line contains an integer $N$ ($1 \leq N \leq 3 \cdot 10^5$), the numbe
 The second line contains $N$ integers, $a_1, a_2, \dots, a_N$ $(1 \leq a_i \leq 10^9)$, where $a_i$ denotes the water level on the $i$-th day.
 
 \section*{Output}
-Print an integer: the maximum amount of water units the thirsy cow can drink across all $N$ days. 
+Print an integer: the maximum amount of water units the thirsty cow can drink across all $N$ days. 
 
 \section*{Scoring}
 Your solution will be tested on a set of test groups, each worth a number of points. Each test group contains
