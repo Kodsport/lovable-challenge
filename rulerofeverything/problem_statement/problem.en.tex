@@ -4,26 +4,27 @@
 You have suddenly developed egomaniacal tendencies and desire fame. You want to get $K$ followers or more on the video platform
 Dutub. To do this, you have planned $N$ video ideas. Thanks to your outstanding intellectual abilities, you know exactly
 how releasing each one will affect your following. Each video has two parameters, $a$ and $b$. If you currently have $f$ followers
-and release a video, your amount of followers afterwards will be $a \cdot f + b$. 
+and release a video, your amount of followers afterwards will be $a \cdot f + b$. You start with $0$ followers.
 
-To attain your goal as soon as possible, you now want to release the smallest number of videos to obtain at least $K$ followers.
+To attain your goal as soon as possible, you want to release the smallest number of videos to obtain at least $K$ followers.
 You can release your chosen videos in any order, but you can only release each video idea at most once.
 
 Because you are impatient, you might change your mind about $K$. In fact, you have to find the minimum number of videos
 for $Q$ different values of $K$.
 
 \section*{Input}
-The first line of input contains the integers $N$ and $Q$ ($1 \le N \le 2 \cdot 10^5$), the number video ideas
-and how follower amounts you want to consider.
+The first line of input contains the integers $N$ and $Q$ ($1 \le N \le 2 \cdot 10^5$), the number of video ideas
+and the number of follower amounts you want to consider.
 
-The following each lines describe your video ideas. Each line contains two integers $a$ and $b$ ($1 \leq a, b \leq 10^5$),
+The following $N$ lines describe your video ideas. Each line contains two integers $a$ and $b$ ($1 \leq a, b \leq 10^5$),
 whose meaning is explained above.
 
-The final line contains $Q$ integers $K_1, K_2, \dots, K_N$ ($1 \leq K_i \leq 8 \cdot 10^9$), the different follow counts
+The final line contains $Q$ integers $K_1, K_2, \dots, K_N$ ($1 \leq K_i \leq 8 \cdot 10^9$), the different follower counts
 you want to consider.
 
 \section*{Output}
-For each $K_i$, print the smallest number of videos you need to release to get $K_i$ followers.
+For each $K_i$, print the smallest number of videos you need to release to get $K_i$ followers. If it's impossible
+to get $K_i$ followers with the given video ideas, print $-1$ instead.
 Print all of these answers on a single line.
 
 \section*{Scoring}
@@ -42,4 +43,14 @@ a set of test cases. To get the points for a test group you need to solve all te
   $6$    & $20$       & No additional constraints. \\ \hline
 \end{tabular}
 
-\section*{Explanation of Sample 1}
+\section*{Explanation of Samples}
+In the first sample, you can obtain at most 9 followers.
+
+In the second sample, for the first question, you can watch both of the $(1,100)$ videos to get 200 followers.
+To get 1006 followers, you can first watch the $(1,100)$ video, then one of the $(2,1)$ videos, and finally the $(5,1)$ video,
+netting you $((0 \cdot 1 + 100) \cdot 2 + 1) \cdot 5 + 1= 1006$ followers using 3 videos. You cannot obtain more than $1006$
+followers using 3 videos.
+
+In the third sample, the largest amount of followers possible is by releasing the videos in the order
+$(2,20)$, $(3,7)$, $(5,2)$, which gets you $((0 \cdot 2 + 20) \cdot 3 + 7) \cdot 5 + 2=337$ followers.
+No order gets you more followers, so it's impossible to get $338$.

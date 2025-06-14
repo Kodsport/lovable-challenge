@@ -17,6 +17,8 @@ compile gen_ones_special1.py
 samplegroup
 limits maxn=10 maxq=5
 sample 1
+sample 2
+sample 3
 
 group group1 2
 limits maxn=10 maxq=5
