@@ -94,7 +94,7 @@ signed main()
             state.second++;
         }
     }
-    cout << ans;
+    cout << ans << '\n';
 
     return 0;
 }

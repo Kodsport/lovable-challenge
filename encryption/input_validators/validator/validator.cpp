@@ -11,17 +11,17 @@ typedef long long ll;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-const int MAXN = 500000;
-
 void run() {
-    int N = Int(1, Arg("MAXN", MAXN));
-    Endl();
-    string s = Line();
+    int maxn = Arg("maxn");
 
-    for (auto &ch: s) assert('a' <= ch and ch <= 'z');
+    auto check = [maxn](int minlen)
+    {
+        string l = Line();
+        assert(sz(l)>=minlen && sz(l) <= maxn);
+        for (char c : l) assert(c>='a'&&c<='z');
+    };
 
-    assert(sz(s) == N);
-
-    Eof();
+    check(1);
+    check(1);
+    check(0);
 }
-

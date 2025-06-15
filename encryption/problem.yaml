@@ -1,8 +1,11 @@
+uuid: 311eb36b-c2d5-4a0c-930f-00a09bb8442e
 author: Joshua Andersson
 source: Lovable Challenge 2025
 rights_owner: Programmeringsolympiaden
 license: cc by-sa
 type: scoring
+
+validation: custom
 
 grading:
     show_test_data_groups: yes

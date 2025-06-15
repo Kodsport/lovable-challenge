@@ -14,10 +14,7 @@ typedef pair<int, int> p2;
 
 inline void fast() { ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL); }
 
-int memo[1010][1010];
-int choice[1010][1010];
-
-signed main()
+int main()
 {
     fast();
 
@@ -26,7 +23,9 @@ signed main()
 
     int n = sz(a), m = sz(b);
 
-    rep(i, n + 1) rep(j, m + 1) memo[i][j] = inf;
+    vvi memo(n + 1, vi(m + 1, n+m+5));
+    vvi choice(n + 1, vi(m + 1, -1));
+
     memo[n][m] = 0;
 
     for (int i = n; i >= 0; i--) {
@@ -74,7 +73,7 @@ signed main()
         }
     }
 
-    cout << ans;
+    cout << ans << '\n';
 
     return 0;
 }

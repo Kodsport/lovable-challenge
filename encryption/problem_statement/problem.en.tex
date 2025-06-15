@@ -1,27 +1,31 @@
 \problemname{Encryption}
 \noindent
 Boschua is not very good at cybersecurity. When he heard of the mantra ``don't roll your own cryptography'', he
-ignored the ``don't''.
+decided to ignore the ``don't''.
 
 He has proposed a new encryption scheme based on \texttt{subsequences}. We say that a string $a$ is a subsequence
 of string $b$ if the string $a$ can be obtained by removing $0$ or more characters from $b$, while keeping the
-relative order of characters. For example, \texttt{hej} and \texttt{hejsan} are both subsequences of the word
+relative order of the characters. For example, \texttt{hej}, \texttt{hejsan} and \texttt{jan} are all subsequences of the word
 \texttt{hejsan}, while \texttt{na} is not. 
 
-His encryption scheme is as follows: to send a string $s$, you need a decoy string, $d$. Then, you will send
-the shortest possible string $k$, where both $s$ and $d$ are subsequences of it. The hope is then that when
-looking at $k$, unwanted parties will only notice the decoy $d$, not $s$. Help realize Boschua's
-terrible encryption scheme by computing $k$, given $s$ and $d$.
+His encryption scheme is as follows: to send a string $s$, you need a decoy string, $d$. Instead of sending $s$,
+you will send the shortest possible string that contains both $s$ and $d$ as subsequences. The hope is then that when
+looking at the sent string, unwanted parties will only notice the decoy $d$, not $s$. Help realize Boschua's
+terrible encryption scheme by computing the shortest string containing both $s$ and $d$ as subsequences.
 
-For some strange reason, you are also given the shortest string that is a subsequence of both $s$ and $d$.
+Boschua also gives you the following string: the longest string that is a subsequence of both $s$ and $d$.
 If there are multiple such strings, you are given an arbitrary one of them.
+Apparently it's a leftover from a previous project and might be useful.
 
 \section*{Input}
 The first line of input contains the string $s$, consisting of lowercase letters \texttt{a}-\texttt{z}.
 
 The second line of input contains the string $d$, consisting of lowercase letters \texttt{a}-\texttt{z}.
 
-The third line of input contains the string $d$, consisting of lowercase letters \texttt{a}-\texttt{z}.
+The third line of input contains the longest string that is a subsequence of both $s$ and $d$,
+consisting of lowercase letters \texttt{a}-\texttt{z}.
+
+It is guaranteed that both $|s|, |d| \geq 1$, but the longest common subsequence might be empty.
 
 \section*{Output}
 Print the shortest string where both $s$ and $d$ appear as subsequences. If there are multiple such strings, any will suffice.
@@ -34,15 +38,14 @@ a set of test cases. To get the points for a test group you need to solve all te
 \begin{tabular}{| l | l | p{12cm} |}
   \hline
   \textbf{Group} & \textbf{Points} & \textbf{Constraints} \\ \hline
-  $1$    & $10$       & $|s|,|d| \leq 100$ \\ \hline
+  $1$    & $20$       & $|s|,|d| \leq 1000$ \\ \hline
   $2$    & $70$       & $|s|,|d| \leq 10^5$ \\ \hline
-  $3$    & $20$       & $|s|,|d| \leq 10^6$ \\ \hline
+  $3$    & $10$       & $|s|,|d| \leq 10^6$ \\ \hline
 \end{tabular}
 
 \section*{Explanation of Samples}
-In sample $1$, you can reverse the substring ``\texttt{ov}'', resulting in \texttt{lvoable}, which then contains
-``\texttt{lv}''.
+In sample $1$, because $s$ and $d$ share no common characters, any solution must contain both of them fully.
 
-In sample $2$, we can replace the ``\texttt{e}'' with a ``\texttt{v}'', which then contains ``\texttt{lv}''.
-
-In sample $3$, the string already contains ``\texttt{lv}''.
+In sample $2$, both $s$ and $d$ are subsequences of \texttt{adbadc}. First, \texttt{abac} can be obtained as
+follows: \texttt{\textbf{a}d\textbf{ba}d\textbf{c}}. Similarly, \texttt{adbdc}, can
+be obtained as follows: \texttt{\textbf{adb}a\textbf{dc}}.

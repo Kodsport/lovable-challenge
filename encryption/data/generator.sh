@@ -5,33 +5,74 @@ PPATH=$(realpath ..)
 
 #ulimit -s unlimited
 
-use_solution harry.py
+use_solution joshua.cpp
 
 compile gen_rand.py
 
-MAXN=500000
-
-
 samplegroup
+limits maxn=10
 sample 1
 sample 2
-sample 3
 
-
-group group1 40
-limits MAXN=100
+group group1 20
+g=1
+N=1000
+limits maxn=$N
 include_group sample
-tc small-1 gen_rand N=1 
-tc small-2 gen_rand N=10 
-tc small-3 gen_rand N=100 mode=nolv 
-tc small-4 gen_rand N=100 mode=nolnov
-tc small-5 gen_rand N=100 
+tc g$g-1 gen_rand n=$N k=1
+tc g$g-2 gen_rand n=$N k=2
+tc g$g-3 gen_rand n=$N k=3
+tc g$g-4 gen_rand n=$N
+tc g$g-5 gen_rand n=$N
+tc g$g-6 gen_rand n=$N mode=repeats s=ab
+tc g$g-7 gen_rand n=$N mode=repeats s=abbab
+tc g$g-8 gen_rand n=$N mode=long_common_prefix
+tc g$g-9 gen_rand n=$N mode=long_common_prefix rev=1
+tc g$g-10 gen_rand n=$N mode=long_common_prefix rev=1
+tc g$g-11 gen_rand n=$N mode=interleaved k=4
+tc g$g-12 gen_rand n=$N mode=interleaved k=10
+tc g$g-13 gen_rand n=$N mode=sparse_matches k=4
+tc g$g-14 gen_rand n=$N mode=sparse_matches k=10
+tc g$g-15 gen_rand n=$N mode=sparse_matches k=26
 
-group group2 60
+group group2 70
+g=2
+N=100000
+limits maxn=$N
 include_group group1
-tc large-1 gen_rand N=$MAXN mode=nolv
-tc large-2 gen_rand N=$MAXN mode=nolnov
-tc large-3 gen_rand N=$MAXN mode=nolnov
-tc large-4 gen_rand N=$MAXN mode=nolv
-tc large-5 gen_rand N=$MAXN
+tc g$g-1 gen_rand n=$N k=1
+tc g$g-2 gen_rand n=$N k=2
+tc g$g-3 gen_rand n=$N k=3
+tc g$g-4 gen_rand n=$N
+tc g$g-5 gen_rand n=$N
+tc g$g-6 gen_rand n=$N mode=repeats s=ab
+tc g$g-7 gen_rand n=$N mode=repeats s=abbab
+tc g$g-8 gen_rand n=$N mode=long_common_prefix
+tc g$g-9 gen_rand n=$N mode=long_common_prefix rev=1
+tc g$g-10 gen_rand n=$N mode=long_common_prefix rev=1
+tc g$g-11 gen_rand n=$N mode=interleaved k=4
+tc g$g-12 gen_rand n=$N mode=interleaved k=10
+tc g$g-13 gen_rand n=$N mode=sparse_matches k=4
+tc g$g-14 gen_rand n=$N mode=sparse_matches k=10
+tc g$g-15 gen_rand n=$N mode=sparse_matches k=26
 
+group group3 10
+g=3
+N=1000000
+limits maxn=$N
+include_group group2
+tc g$g-1 gen_rand n=$N k=1
+tc g$g-2 gen_rand n=$N k=2
+tc g$g-3 gen_rand n=$N k=3
+tc g$g-4 gen_rand n=$N
+tc g$g-5 gen_rand n=$N
+tc g$g-6 gen_rand n=$N mode=repeats s=ab
+tc g$g-7 gen_rand n=$N mode=repeats s=abbab
+tc g$g-8 gen_rand n=$N mode=long_common_prefix
+tc g$g-9 gen_rand n=$N mode=long_common_prefix rev=1
+tc g$g-10 gen_rand n=$N mode=long_common_prefix rev=1
+tc g$g-11 gen_rand n=$N mode=interleaved k=4
+tc g$g-12 gen_rand n=$N mode=interleaved k=10
+tc g$g-13 gen_rand n=$N mode=sparse_matches k=4
+tc g$g-14 gen_rand n=$N mode=sparse_matches k=10
+tc g$g-15 gen_rand n=$N mode=sparse_matches k=26

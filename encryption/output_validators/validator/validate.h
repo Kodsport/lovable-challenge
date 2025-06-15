@@ -49,6 +49,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
+using std::string;
 
 typedef void (*feedback_function)(const char*, ...);
 
@@ -79,6 +81,18 @@ void vreport_feedback(const char* category,
     fclose(f);
 }
 
+void report_feedback(const string& category, const string& msg) {
+    std::ostringstream fname;
+    if (feedbackdir)
+        fname << feedbackdir << '/';
+    fname << category;
+    
+    FILE* f = fopen(fname.str().c_str(), "a");
+    assert(f);
+    fprintf(f, "%s", msg.c_str());
+    fclose(f);
+}
+
 void report_feedback(const char* category, const char* msg, ...) {
     va_list pvar;
     va_start(pvar, msg);
@@ -101,6 +115,11 @@ void wrong_answer(const char* msg, ...) {
     va_list pvar;
     va_start(pvar, msg);
     vreport_feedback(FILENAME_JUDGE_MESSAGE, msg, pvar);
+    exit(EXITCODE_WA);
+}
+
+void wrong_answer(const string& msg) {
+    report_feedback(FILENAME_JUDGE_MESSAGE, msg);
     exit(EXITCODE_WA);
 }
 

@@ -16,7 +16,20 @@ int main(int argc, char **argv) {
 	init_io(argc, argv);
 
 	string a,b,lcs;
-	cin >> a >> b >> lcs;
+	judge_in >> a >> b >> lcs;
+
+	// is a a subsequence of b?
+	auto is_subsequence = [](string a, string b)
+	{
+		int j = 0;
+		rep(i,0,sz(a))
+		{
+			while (j<sz(b)&&a[i]!=b[j]) j++;
+			if (j==sz(b)) return false;
+			j++;
+		}
+		return true;
+	};
 
 	auto check = [&](istream& sol, feedback_function feedback){
 		string ans;
@@ -25,52 +38,28 @@ int main(int argc, char **argv) {
 		{
 			if (c < 'a' || c > 'z')
 			{
-				feedback("Answer contains character that is not a or z, which is provable suboptimal", ans.c_str());
+				feedback("Answer contains character that is not a or z, which is provably suboptimal");
 			}
 		}
-		if(ans != "NO" && ans != "YES")
-		feedback("Answer \'%s\' is not {YES|NO}", ans.c_str());
-
-		if(ans == "NO") {
-			string trailing;
-			if(sol >> trailing) feedback("Trailing output");
-			return false;
-		}
-
-		int k;
-		if(!(sol >> k)) feedback("Expected more output");
-		if(k < 4 || k > n) feedback("k = %d is out of range", k);
-		if(k % 2 != 0) feedback("k = %d is odd", k);
-
-		vi seen(n+1,0);
-		vi c;
-		rep(i,0,k) {
-		int x;
-		if(!(sol >> x)) feedback("Expected more output");
-		if(x < 1 || x > n) feedback("vertex x = %d is out of range", x);
-		if(seen[x]) feedback("duplicate vertex x = %d", x);
-		c.emplace_back(x);
-		seen[x] = 1;
-		}
-
-		rep(i,0,k) if(!edges.count(pii(c[i], c[(i+1)%k])))
-		feedback("edge (%d,%d) does not exist", c[i], c[(i+1)%k]);
+		
+		if (!is_subsequence(a, ans)) feedback("a is not subsequence of the given answer");
+		if (!is_subsequence(b, ans)) feedback("b is not subsequence of the given answer");
 
 		string trailing;
 		if(sol >> trailing) feedback("Trailing output");
-		return true;
+		return sz(ans);
 	};
 	int scs_length = sz(a)+sz(b)-sz(lcs);
+	int judge_length = check(judge_ans, judge_error);
+  	int author_length = check(author_out, wrong_answer);
 
+	if (min(author_length, judge_length) < scs_length)
+	{
+		judge_error("Incorrect LCS");
+	}
 
-  bool judge_found_even = check(judge_ans, judge_error);
-  bool author_found_even = check(author_out, wrong_answer);
+	if (author_length < judge_length) judge_error("NO! contestant found shorter solution than judge");
+	if (author_length > judge_length) wrong_answer("Suboptimal answer: got "+to_string(author_length) + ", expected " + to_string(judge_length));
 
-  if(!judge_found_even && author_found_even)
-    judge_error("NO! Solution found a cycle, but judge says none exists");
-
-  if(judge_found_even && !author_found_even)
-    wrong_answer("Cycle exists, but solution did not find it");
-
-  accept();
+	accept();
 }
